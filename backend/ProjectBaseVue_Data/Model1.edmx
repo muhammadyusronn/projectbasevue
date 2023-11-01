@@ -1,0 +1,1829 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ProjectBaseVueModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APISetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Credential" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="10" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Changelog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Version" Type="varchar" MaxLength="50" />
+          <Property Name="VersionDate" Type="datetime" />
+          <Property Name="Remarks" Type="varchar" MaxLength="250" />
+          <Property Name="Active" Type="varchar" MaxLength="1" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ChangelogDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChangelogId" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Info1" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CompanyDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_Id" Type="bigint" Nullable="false" />
+          <Property Name="LocationCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="phone" Type="int" Nullable="false" />
+          <Property Name="salary" Type="int" Nullable="false" />
+          <Property Name="departement" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Example">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentNo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="LocationCode" Type="varchar" MaxLength="50" />
+          <Property Name="DocumentType" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="ExampleDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExampleId" Type="bigint" Nullable="false" />
+          <Property Name="MaterialCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UOM" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Group_Description" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GroupMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Group_Id" Type="bigint" Nullable="false" />
+          <Property Name="Menu_Id" Type="bigint" Nullable="false" />
+          <Property Name="View" Type="bit" Nullable="false" />
+          <Property Name="Edit" Type="bit" Nullable="false" />
+          <Property Name="Delete" Type="bit" Nullable="false" />
+          <Property Name="Create" Type="bit" Nullable="false" />
+          <Property Name="Print" Type="bit" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LookupGroup" Type="varchar(max)" Nullable="false" />
+          <Property Name="LookupKey" Type="varchar(max)" />
+          <Property Name="LookupValue" Type="varchar(max)" />
+          <Property Name="LookupInfo1" Type="varchar(max)" />
+          <Property Name="LookupInfo2" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="varchar" MaxLength="100" />
+          <Property Name="MenuAction" Type="varchar" MaxLength="100" />
+          <Property Name="MenuController" Type="varchar" MaxLength="100" />
+          <Property Name="MenuIcon" Type="varchar" MaxLength="100" />
+          <Property Name="Parent" Type="bigint" />
+          <Property Name="Ordinal" Type="int" />
+          <Property Name="Visible" Type="bit" />
+        </EntityType>
+        <EntityType Name="NotificationLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="150" />
+          <Property Name="Action" Type="varchar" MaxLength="50" />
+          <Property Name="Subject" Type="varchar" MaxLength="100" />
+          <Property Name="MailTo" Type="varchar(max)" />
+          <Property Name="MailCc" Type="varchar(max)" />
+          <Property Name="MailBody" Type="nvarchar(max)" />
+          <Property Name="Result" Type="varchar" MaxLength="50" />
+          <Property Name="Created_By" Type="varchar" MaxLength="50" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RequestLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefNo" Type="varchar" MaxLength="150" />
+          <Property Name="LocationCode" Type="varchar" MaxLength="50" />
+          <Property Name="ActionRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="ActionBy" Type="varchar" MaxLength="50" />
+          <Property Name="ActionDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Modul" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RunningNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransType" Type="varchar" MaxLength="50" />
+          <Property Name="RangeFromNumber" Type="int" />
+          <Property Name="RangeToNumber" Type="int" />
+          <Property Name="Format" Type="varchar" MaxLength="100" />
+          <Property Name="AdditionalTrans" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="200" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="200" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="Deleted_By" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="RunningNumberDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="LastNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="RunningNumberMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+          <Property Name="LastNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="RunningNumberYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="LastNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Value" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Full_Name" Type="varchar" MaxLength="150" />
+          <Property Name="Password" Type="varchar" MaxLength="150" />
+          <Property Name="Email" Type="varchar" MaxLength="80" />
+          <Property Name="Location_Code" Type="varchar" MaxLength="50" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Use_AD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="LastAccessDate" Type="datetime" />
+          <Property Name="FirstLogin" Type="varchar" MaxLength="10" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="Group_Id" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserPassLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="RoleId" Type="bigint" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="Token" Type="varchar(max)" />
+          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+          <Property Name="Active" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ChangelogDetail_Changelog">
+          <End Role="Changelog" Type="Self.Changelog" Multiplicity="1" />
+          <End Role="ChangelogDetail" Type="Self.ChangelogDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Changelog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangelogDetail">
+              <PropertyRef Name="ChangelogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Detail_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="CompanyDetail" Type="Self.CompanyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDetail">
+              <PropertyRef Name="Company_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExampleDetail_Example">
+          <End Role="Example" Type="Self.Example" Multiplicity="1" />
+          <End Role="ExampleDetail" Type="Self.ExampleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Example">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExampleDetail">
+              <PropertyRef Name="ExampleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Menu_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="GroupMenu" Type="Self.GroupMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMenu">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Menu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="GroupMenu" Type="Self.GroupMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMenu">
+              <PropertyRef Name="Menu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberDate_RunningNumber">
+          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
+          <End Role="RunningNumberDate" Type="Self.RunningNumberDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberDate">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberMonth_RunningNumber">
+          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
+          <End Role="RunningNumberMonth" Type="Self.RunningNumberMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberMonth">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberYear_RunningNumber">
+          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
+          <End Role="RunningNumberYear" Type="Self.RunningNumberYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberYear">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Pass_Log_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPassLog" Type="Self.UserPassLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPassLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCompany_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserCompany" Type="Self.UserCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCompany">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectBaseVueModelStoreContainer">
+          <EntitySet Name="APISetting" EntityType="Self.APISetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Changelog" EntityType="Self.Changelog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChangelogDetail" EntityType="Self.ChangelogDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDetail" EntityType="Self.CompanyDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Example" EntityType="Self.Example" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExampleDetail" EntityType="Self.ExampleDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupMenu" EntityType="Self.GroupMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotificationLog" EntityType="Self.NotificationLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestLog" EntityType="Self.RequestLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningNumber" EntityType="Self.RunningNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningNumberDate" EntityType="Self.RunningNumberDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningNumberMonth" EntityType="Self.RunningNumberMonth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RunningNumberYear" EntityType="Self.RunningNumberYear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserCompany" EntityType="Self.UserCompany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPassLog" EntityType="Self.UserPassLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserToken" EntityType="Self.UserToken" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ChangelogDetail_Changelog" Association="Self.FK_ChangelogDetail_Changelog">
+            <End Role="Changelog" EntitySet="Changelog" />
+            <End Role="ChangelogDetail" EntitySet="ChangelogDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Detail_Company" Association="Self.FK_Company_Detail_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyDetail" EntitySet="CompanyDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExampleDetail_Example" Association="Self.FK_ExampleDetail_Example">
+            <End Role="Example" EntitySet="Example" />
+            <End Role="ExampleDetail" EntitySet="ExampleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Menu_Group" Association="Self.FK_Group_Menu_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="GroupMenu" EntitySet="GroupMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Menu_Menu" Association="Self.FK_Group_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="GroupMenu" EntitySet="GroupMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberDate_RunningNumber" Association="Self.FK_RunningNumberDate_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberDate" EntitySet="RunningNumberDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberMonth_RunningNumber" Association="Self.FK_RunningNumberMonth_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberMonth" EntitySet="RunningNumberMonth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberYear_RunningNumber" Association="Self.FK_RunningNumberYear_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberYear" EntitySet="RunningNumberYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_Group" Association="Self.FK_Table_1_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="UserGroup" EntitySet="UserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_User" Association="Self.FK_Table_1_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserGroup" EntitySet="UserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Pass_Log_User" Association="Self.FK_User_Pass_Log_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPassLog" EntitySet="UserPassLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Role" Association="Self.FK_User_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_User" Association="Self.FK_User_Role_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCompany_User" Association="Self.FK_UserCompany_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserCompany" EntitySet="UserCompany" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectBaseVueModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProjectBaseVueEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APISetting" EntityType="ProjectBaseVueModel.APISetting" />
+          <EntitySet Name="Changelog" EntityType="ProjectBaseVueModel.Changelog" />
+          <EntitySet Name="ChangelogDetail" EntityType="ProjectBaseVueModel.ChangelogDetail" />
+          <EntitySet Name="Company" EntityType="ProjectBaseVueModel.Company" />
+          <EntitySet Name="CompanyDetail" EntityType="ProjectBaseVueModel.CompanyDetail" />
+          <EntitySet Name="Department" EntityType="ProjectBaseVueModel.Department" />
+          <EntitySet Name="Employees" EntityType="ProjectBaseVueModel.Employees" />
+          <EntitySet Name="Example" EntityType="ProjectBaseVueModel.Example" />
+          <EntitySet Name="ExampleDetail" EntityType="ProjectBaseVueModel.ExampleDetail" />
+          <EntitySet Name="Group" EntityType="ProjectBaseVueModel.Group" />
+          <EntitySet Name="GroupMenu" EntityType="ProjectBaseVueModel.GroupMenu" />
+          <EntitySet Name="Location" EntityType="ProjectBaseVueModel.Location" />
+          <EntitySet Name="Lookup" EntityType="ProjectBaseVueModel.Lookup" />
+          <EntitySet Name="Menu" EntityType="ProjectBaseVueModel.Menu" />
+          <EntitySet Name="NotificationLog" EntityType="ProjectBaseVueModel.NotificationLog" />
+          <EntitySet Name="RequestLog" EntityType="ProjectBaseVueModel.RequestLog" />
+          <EntitySet Name="Role" EntityType="ProjectBaseVueModel.Role" />
+          <EntitySet Name="RunningNumber" EntityType="ProjectBaseVueModel.RunningNumber" />
+          <EntitySet Name="RunningNumberDate" EntityType="ProjectBaseVueModel.RunningNumberDate" />
+          <EntitySet Name="RunningNumberMonth" EntityType="ProjectBaseVueModel.RunningNumberMonth" />
+          <EntitySet Name="RunningNumberYear" EntityType="ProjectBaseVueModel.RunningNumberYear" />
+          <EntitySet Name="Setting" EntityType="ProjectBaseVueModel.Setting" />
+          <EntitySet Name="User" EntityType="ProjectBaseVueModel.User" />
+          <EntitySet Name="UserCompany" EntityType="ProjectBaseVueModel.UserCompany" />
+          <EntitySet Name="UserGroup" EntityType="ProjectBaseVueModel.UserGroup" />
+          <EntitySet Name="UserPassLog" EntityType="ProjectBaseVueModel.UserPassLog" />
+          <EntitySet Name="UserRole" EntityType="ProjectBaseVueModel.UserRole" />
+          <EntitySet Name="UserToken" EntityType="ProjectBaseVueModel.UserToken" />
+          <AssociationSet Name="FK_ChangelogDetail_Changelog" Association="ProjectBaseVueModel.FK_ChangelogDetail_Changelog">
+            <End Role="Changelog" EntitySet="Changelog" />
+            <End Role="ChangelogDetail" EntitySet="ChangelogDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Detail_Company" Association="ProjectBaseVueModel.FK_Company_Detail_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyDetail" EntitySet="CompanyDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExampleDetail_Example" Association="ProjectBaseVueModel.FK_ExampleDetail_Example">
+            <End Role="Example" EntitySet="Example" />
+            <End Role="ExampleDetail" EntitySet="ExampleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Menu_Group" Association="ProjectBaseVueModel.FK_Group_Menu_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="GroupMenu" EntitySet="GroupMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_Group" Association="ProjectBaseVueModel.FK_Table_1_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="UserGroup" EntitySet="UserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Menu_Menu" Association="ProjectBaseVueModel.FK_Group_Menu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="GroupMenu" EntitySet="GroupMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_Role" Association="ProjectBaseVueModel.FK_User_Role_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberDate_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberDate" EntitySet="RunningNumberDate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberMonth_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberMonth" EntitySet="RunningNumberMonth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RunningNumberYear_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber">
+            <End Role="RunningNumber" EntitySet="RunningNumber" />
+            <End Role="RunningNumberYear" EntitySet="RunningNumberYear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_1_User" Association="ProjectBaseVueModel.FK_Table_1_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserGroup" EntitySet="UserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Pass_Log_User" Association="ProjectBaseVueModel.FK_User_Pass_Log_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPassLog" EntitySet="UserPassLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role_User" Association="ProjectBaseVueModel.FK_User_Role_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserCompany_User" Association="ProjectBaseVueModel.FK_UserCompany_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserCompany" EntitySet="UserCompany" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="APISetting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Credential" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Changelog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VersionDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ChangelogDetail" Relationship="ProjectBaseVueModel.FK_ChangelogDetail_Changelog" FromRole="Changelog" ToRole="ChangelogDetail" />
+        </EntityType>
+        <EntityType Name="ChangelogDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChangelogId" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Info1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Changelog" Relationship="ProjectBaseVueModel.FK_ChangelogDetail_Changelog" FromRole="ChangelogDetail" ToRole="Changelog" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CompanyDetail" Relationship="ProjectBaseVueModel.FK_Company_Detail_Company" FromRole="Company" ToRole="CompanyDetail" />
+        </EntityType>
+        <EntityType Name="CompanyDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Id" Type="Int64" Nullable="false" />
+          <Property Name="LocationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Company" Relationship="ProjectBaseVueModel.FK_Company_Detail_Company" FromRole="CompanyDetail" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="Int32" Nullable="false" />
+          <Property Name="salary" Type="Int32" Nullable="false" />
+          <Property Name="departement" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Example">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentNo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ExampleDetail" Relationship="ProjectBaseVueModel.FK_ExampleDetail_Example" FromRole="Example" ToRole="ExampleDetail" />
+        </EntityType>
+        <EntityType Name="ExampleDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExampleId" Type="Int64" Nullable="false" />
+          <Property Name="MaterialCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Example" Relationship="ProjectBaseVueModel.FK_ExampleDetail_Example" FromRole="ExampleDetail" ToRole="Example" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Group_Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GroupMenu" Relationship="ProjectBaseVueModel.FK_Group_Menu_Group" FromRole="Group" ToRole="GroupMenu" />
+          <NavigationProperty Name="UserGroup" Relationship="ProjectBaseVueModel.FK_Table_1_Group" FromRole="Group" ToRole="UserGroup" />
+        </EntityType>
+        <EntityType Name="GroupMenu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Group_Id" Type="Int64" Nullable="false" />
+          <Property Name="Menu_Id" Type="Int64" Nullable="false" />
+          <Property Name="View" Type="Boolean" Nullable="false" />
+          <Property Name="Edit" Type="Boolean" Nullable="false" />
+          <Property Name="Delete" Type="Boolean" Nullable="false" />
+          <Property Name="Create" Type="Boolean" Nullable="false" />
+          <Property Name="Print" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Group" Relationship="ProjectBaseVueModel.FK_Group_Menu_Group" FromRole="GroupMenu" ToRole="Group" />
+          <NavigationProperty Name="Menu" Relationship="ProjectBaseVueModel.FK_Group_Menu_Menu" FromRole="GroupMenu" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LookupGroup" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LookupKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LookupValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LookupInfo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LookupInfo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MenuAction" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MenuController" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MenuIcon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Parent" Type="Int64" />
+          <Property Name="Ordinal" Type="Int32" />
+          <Property Name="Visible" Type="Boolean" />
+          <NavigationProperty Name="GroupMenu" Relationship="ProjectBaseVueModel.FK_Group_Menu_Menu" FromRole="Menu" ToRole="GroupMenu" />
+        </EntityType>
+        <EntityType Name="NotificationLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferenceNo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MailTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MailCc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MailBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_By" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RequestLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefNo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LocationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ActionBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Modul" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserRole" Relationship="ProjectBaseVueModel.FK_User_Role_Role" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="RunningNumber">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RangeFromNumber" Type="Int32" />
+          <Property Name="RangeToNumber" Type="Int32" />
+          <Property Name="Format" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalTrans" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deleted_By" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RunningNumberDate" Relationship="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberDate" />
+          <NavigationProperty Name="RunningNumberMonth" Relationship="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberMonth" />
+          <NavigationProperty Name="RunningNumberYear" Relationship="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberYear" />
+        </EntityType>
+        <EntityType Name="RunningNumberDate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="LastNumber" Type="Int32" />
+          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber" FromRole="RunningNumberDate" ToRole="RunningNumber" />
+        </EntityType>
+        <EntityType Name="RunningNumberMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="LastNumber" Type="Int32" />
+          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber" FromRole="RunningNumberMonth" ToRole="RunningNumber" />
+        </EntityType>
+        <EntityType Name="RunningNumberYear">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="LastNumber" Type="Int32" />
+          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber" FromRole="RunningNumberYear" ToRole="RunningNumber" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Full_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Location_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAdmin" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Use_AD" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastAccessDate" Type="DateTime" Precision="3" />
+          <Property Name="FirstLogin" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserGroup" Relationship="ProjectBaseVueModel.FK_Table_1_User" FromRole="User" ToRole="UserGroup" />
+          <NavigationProperty Name="UserPassLog" Relationship="ProjectBaseVueModel.FK_User_Pass_Log_User" FromRole="User" ToRole="UserPassLog" />
+          <NavigationProperty Name="UserRole" Relationship="ProjectBaseVueModel.FK_User_Role_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="UserCompany" Relationship="ProjectBaseVueModel.FK_UserCompany_User" FromRole="User" ToRole="UserCompany" />
+        </EntityType>
+        <EntityType Name="UserCompany">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="ProjectBaseVueModel.FK_UserCompany_User" FromRole="UserCompany" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="Group_Id" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Group" Relationship="ProjectBaseVueModel.FK_Table_1_Group" FromRole="UserGroup" ToRole="Group" />
+          <NavigationProperty Name="User" Relationship="ProjectBaseVueModel.FK_Table_1_User" FromRole="UserGroup" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserPassLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="ProjectBaseVueModel.FK_User_Pass_Log_User" FromRole="UserPassLog" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="RoleId" Type="Int64" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Role" Relationship="ProjectBaseVueModel.FK_User_Role_Role" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="ProjectBaseVueModel.FK_User_Role_User" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Active" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_ChangelogDetail_Changelog">
+          <End Type="ProjectBaseVueModel.Changelog" Role="Changelog" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.ChangelogDetail" Role="ChangelogDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Changelog">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChangelogDetail">
+              <PropertyRef Name="ChangelogId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Detail_Company">
+          <End Type="ProjectBaseVueModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.CompanyDetail" Role="CompanyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDetail">
+              <PropertyRef Name="Company_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExampleDetail_Example">
+          <End Type="ProjectBaseVueModel.Example" Role="Example" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.ExampleDetail" Role="ExampleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Example">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExampleDetail">
+              <PropertyRef Name="ExampleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Menu_Group">
+          <End Type="ProjectBaseVueModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.GroupMenu" Role="GroupMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMenu">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_Group">
+          <End Type="ProjectBaseVueModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="Group_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Menu_Menu">
+          <End Type="ProjectBaseVueModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.GroupMenu" Role="GroupMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupMenu">
+              <PropertyRef Name="Menu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_Role">
+          <End Type="ProjectBaseVueModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberDate_RunningNumber">
+          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.RunningNumberDate" Role="RunningNumberDate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberDate">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberMonth_RunningNumber">
+          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.RunningNumberMonth" Role="RunningNumberMonth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberMonth">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RunningNumberYear_RunningNumber">
+          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.RunningNumberYear" Role="RunningNumberYear" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RunningNumber">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RunningNumberYear">
+              <PropertyRef Name="RunningNumberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_1_User">
+          <End Type="ProjectBaseVueModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserGroup" Role="UserGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserGroup">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Pass_Log_User">
+          <End Type="ProjectBaseVueModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserPassLog" Role="UserPassLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserPassLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role_User">
+          <End Type="ProjectBaseVueModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserCompany_User">
+          <End Type="ProjectBaseVueModel.User" Role="User" Multiplicity="1" />
+          <End Type="ProjectBaseVueModel.UserCompany" Role="UserCompany" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserCompany">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectBaseVueModelStoreContainer" CdmEntityContainer="ProjectBaseVueEntities">
+          <EntitySetMapping Name="APISetting">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.APISetting">
+              <MappingFragment StoreEntitySet="APISetting">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Credential" ColumnName="Credential" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Changelog">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Changelog">
+              <MappingFragment StoreEntitySet="Changelog">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChangelogDetail">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.ChangelogDetail">
+              <MappingFragment StoreEntitySet="ChangelogDetail">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Info1" ColumnName="Info1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ChangelogId" ColumnName="ChangelogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDetail">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.CompanyDetail">
+              <MappingFragment StoreEntitySet="CompanyDetail">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="departement" ColumnName="departement" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Example">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Example">
+              <MappingFragment StoreEntitySet="Example">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExampleDetail">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.ExampleDetail">
+              <MappingFragment StoreEntitySet="ExampleDetail">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MaterialCode" />
+                <ScalarProperty Name="ExampleId" ColumnName="ExampleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Group_Description" ColumnName="Group_Description" />
+                <ScalarProperty Name="Group_Code" ColumnName="Group_Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupMenu">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.GroupMenu">
+              <MappingFragment StoreEntitySet="GroupMenu">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Print" ColumnName="Print" />
+                <ScalarProperty Name="Create" ColumnName="Create" />
+                <ScalarProperty Name="Delete" ColumnName="Delete" />
+                <ScalarProperty Name="Edit" ColumnName="Edit" />
+                <ScalarProperty Name="View" ColumnName="View" />
+                <ScalarProperty Name="Menu_Id" ColumnName="Menu_Id" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookup">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookup">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="LookupInfo2" ColumnName="LookupInfo2" />
+                <ScalarProperty Name="LookupInfo1" ColumnName="LookupInfo1" />
+                <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
+                <ScalarProperty Name="LookupKey" ColumnName="LookupKey" />
+                <ScalarProperty Name="LookupGroup" ColumnName="LookupGroup" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Ordinal" ColumnName="Ordinal" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+                <ScalarProperty Name="MenuController" ColumnName="MenuController" />
+                <ScalarProperty Name="MenuAction" ColumnName="MenuAction" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationLog">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.NotificationLog">
+              <MappingFragment StoreEntitySet="NotificationLog">
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="MailBody" ColumnName="MailBody" />
+                <ScalarProperty Name="MailCc" ColumnName="MailCc" />
+                <ScalarProperty Name="MailTo" ColumnName="MailTo" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestLog">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.RequestLog">
+              <MappingFragment StoreEntitySet="RequestLog">
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ActionBy" ColumnName="ActionBy" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ActionRole" ColumnName="ActionRole" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Modul" ColumnName="Modul" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningNumber">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumber">
+              <MappingFragment StoreEntitySet="RunningNumber">
+                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="AdditionalTrans" ColumnName="AdditionalTrans" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="RangeToNumber" ColumnName="RangeToNumber" />
+                <ScalarProperty Name="RangeFromNumber" ColumnName="RangeFromNumber" />
+                <ScalarProperty Name="TransType" ColumnName="TransType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningNumberDate">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberDate">
+              <MappingFragment StoreEntitySet="RunningNumberDate">
+                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningNumberMonth">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberMonth">
+              <MappingFragment StoreEntitySet="RunningNumberMonth">
+                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RunningNumberYear">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberYear">
+              <MappingFragment StoreEntitySet="RunningNumberYear">
+                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setting">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="FirstLogin" ColumnName="FirstLogin" />
+                <ScalarProperty Name="LastAccessDate" ColumnName="LastAccessDate" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Use_AD" ColumnName="Use_AD" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCompany">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserCompany">
+              <MappingFragment StoreEntitySet="UserCompany">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGroup">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserGroup">
+              <MappingFragment StoreEntitySet="UserGroup">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Group_Id" ColumnName="Group_Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPassLog">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserPassLog">
+              <MappingFragment StoreEntitySet="UserPassLog">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRole">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserToken">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserToken">
+              <MappingFragment StoreEntitySet="UserToken">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -303,51 +303,6 @@ namespace ProjectBaseVue_API.Controllers
             return new { items = data };
         }
 
-
-        [HttpGet]
-        [Route("lookup")]
-        public object Lookup(string q = "", int page = 0, bool init = false, string group = "", bool allow_all=false)
-        {
-            int fromIdx = page > 0 ? (page * 10) : 0;
-            int toIdx = 10;
-            var listData = db.Lookup.Where(r => 1 == 2);
-
-            if (init)
-            {
-                listData = db.Lookup
-                               .Where
-                               (
-                                   r =>
-                                   r.LookupGroup == group &&
-                                   (string.IsNullOrEmpty(q) || r.LookupKey.ToLower() == q.ToLower())
-                               )
-                               .OrderBy(r => r.LookupGroup).ThenBy(r => r.LookupKey);
-            }
-            else
-            {
-                listData = db.Lookup
-                         .Where
-                         (
-                             r =>
-                             r.LookupGroup == group &&
-                             (string.IsNullOrEmpty(q) || (r.LookupValue).ToLower().Contains(q.ToLower()))
-                             && r.IsDeleted != "Y"
-                         )
-                         .OrderBy(r => r.LookupGroup).ThenBy(r => r.LookupKey);
-            }
-            var data = listData.Skip(fromIdx)
-                .Take(toIdx)
-                .Select(r => new { 
-                    id = r.LookupKey, 
-                    text = r.LookupValue, 
-                    Lookup_Info1 = string.IsNullOrEmpty(r.LookupInfo1) ? "" : r.LookupInfo1, 
-                    Lookup_Info2 = string.IsNullOrEmpty(r.LookupInfo2) ? "" : r.LookupInfo2
-                })
-                .ToList();
-
-            return new { items = data };
-        }
-
         [HttpGet]
         [Route("release_status_all")]
         public object ReleaseStatusListGeneral(string q="", string initValue = "", int page = 0)

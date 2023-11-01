@@ -37,15 +37,10 @@ namespace ProjectBaseVue_Data
         public virtual DbSet<Group> Group { get; set; }
         public virtual DbSet<GroupMenu> GroupMenu { get; set; }
         public virtual DbSet<Location> Location { get; set; }
-        public virtual DbSet<Lookup> Lookup { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<NotificationLog> NotificationLog { get; set; }
         public virtual DbSet<RequestLog> RequestLog { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<RunningNumber> RunningNumber { get; set; }
-        public virtual DbSet<RunningNumberDate> RunningNumberDate { get; set; }
-        public virtual DbSet<RunningNumberMonth> RunningNumberMonth { get; set; }
-        public virtual DbSet<RunningNumberYear> RunningNumberYear { get; set; }
         public virtual DbSet<Setting> Setting { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserCompany> UserCompany { get; set; }

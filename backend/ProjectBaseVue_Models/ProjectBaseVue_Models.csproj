@@ -91,9 +91,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppointmentMatrixModel.cs" />
-    <Compile Include="ApprovalMatrixModel.cs" />
-    <Compile Include="ApprovalModel.cs" />
     <Compile Include="DepartmentModel.cs" />
     <Compile Include="EmployeeModel.cs" />
     <Compile Include="ExampleModel.cs" />
@@ -115,7 +112,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RunningNumberModel.cs" />
     <Compile Include="Base\UserModel.cs" />
     <Compile Include="Base\BaseProgram.cs" />
     <Compile Include="Class1.cs" />

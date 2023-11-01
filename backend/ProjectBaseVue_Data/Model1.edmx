@@ -193,24 +193,6 @@
           <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
           <Property Name="DeletedDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="Lookup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LookupGroup" Type="varchar(max)" Nullable="false" />
-          <Property Name="LookupKey" Type="varchar(max)" />
-          <Property Name="LookupValue" Type="varchar(max)" />
-          <Property Name="LookupInfo1" Type="varchar(max)" />
-          <Property Name="LookupInfo2" Type="varchar(max)" />
-          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="EditedDate" Type="datetime" />
-          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
-          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="DeletedDate" Type="datetime" />
-          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
-        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -267,54 +249,6 @@
           <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
           <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
           <Property Name="DeletedDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="RunningNumber">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TransType" Type="varchar" MaxLength="50" />
-          <Property Name="RangeFromNumber" Type="int" />
-          <Property Name="RangeToNumber" Type="int" />
-          <Property Name="Format" Type="varchar" MaxLength="100" />
-          <Property Name="AdditionalTrans" Type="varchar" MaxLength="100" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="200" />
-          <Property Name="EditedDate" Type="datetime" />
-          <Property Name="EditedBy" Type="varchar" MaxLength="200" />
-          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
-          <Property Name="DeletedDate" Type="datetime" />
-          <Property Name="Deleted_By" Type="varchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="RunningNumberDate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
-          <Property Name="Date" Type="int" />
-          <Property Name="Month" Type="int" />
-          <Property Name="Year" Type="int" />
-          <Property Name="LastNumber" Type="int" />
-        </EntityType>
-        <EntityType Name="RunningNumberMonth">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
-          <Property Name="Month" Type="int" />
-          <Property Name="Year" Type="int" />
-          <Property Name="LastNumber" Type="int" />
-        </EntityType>
-        <EntityType Name="RunningNumberYear">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RunningNumberId" Type="bigint" Nullable="false" />
-          <Property Name="Year" Type="int" />
-          <Property Name="LastNumber" Type="int" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -473,42 +407,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RunningNumberDate_RunningNumber">
-          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
-          <End Role="RunningNumberDate" Type="Self.RunningNumberDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberDate">
-              <PropertyRef Name="RunningNumberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RunningNumberMonth_RunningNumber">
-          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
-          <End Role="RunningNumberMonth" Type="Self.RunningNumberMonth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberMonth">
-              <PropertyRef Name="RunningNumberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RunningNumberYear_RunningNumber">
-          <End Role="RunningNumber" Type="Self.RunningNumber" Multiplicity="1" />
-          <End Role="RunningNumberYear" Type="Self.RunningNumberYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberYear">
-              <PropertyRef Name="RunningNumberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Table_1_Group">
           <End Role="Group" Type="Self.Group" Multiplicity="1" />
           <End Role="UserGroup" Type="Self.UserGroup" Multiplicity="*" />
@@ -594,15 +492,10 @@
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupMenu" EntityType="Self.GroupMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lookup" EntityType="Self.Lookup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationLog" EntityType="Self.NotificationLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestLog" EntityType="Self.RequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RunningNumber" EntityType="Self.RunningNumber" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RunningNumberDate" EntityType="Self.RunningNumberDate" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RunningNumberMonth" EntityType="Self.RunningNumberMonth" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="RunningNumberYear" EntityType="Self.RunningNumberYear" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCompany" EntityType="Self.UserCompany" Schema="dbo" store:Type="Tables" />
@@ -629,18 +522,6 @@
           <AssociationSet Name="FK_Group_Menu_Menu" Association="Self.FK_Group_Menu_Menu">
             <End Role="Menu" EntitySet="Menu" />
             <End Role="GroupMenu" EntitySet="GroupMenu" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberDate_RunningNumber" Association="Self.FK_RunningNumberDate_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberDate" EntitySet="RunningNumberDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberMonth_RunningNumber" Association="Self.FK_RunningNumberMonth_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberMonth" EntitySet="RunningNumberMonth" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberYear_RunningNumber" Association="Self.FK_RunningNumberYear_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberYear" EntitySet="RunningNumberYear" />
           </AssociationSet>
           <AssociationSet Name="FK_Table_1_Group" Association="Self.FK_Table_1_Group">
             <End Role="Group" EntitySet="Group" />
@@ -684,15 +565,10 @@
           <EntitySet Name="Group" EntityType="ProjectBaseVueModel.Group" />
           <EntitySet Name="GroupMenu" EntityType="ProjectBaseVueModel.GroupMenu" />
           <EntitySet Name="Location" EntityType="ProjectBaseVueModel.Location" />
-          <EntitySet Name="Lookup" EntityType="ProjectBaseVueModel.Lookup" />
           <EntitySet Name="Menu" EntityType="ProjectBaseVueModel.Menu" />
           <EntitySet Name="NotificationLog" EntityType="ProjectBaseVueModel.NotificationLog" />
           <EntitySet Name="RequestLog" EntityType="ProjectBaseVueModel.RequestLog" />
           <EntitySet Name="Role" EntityType="ProjectBaseVueModel.Role" />
-          <EntitySet Name="RunningNumber" EntityType="ProjectBaseVueModel.RunningNumber" />
-          <EntitySet Name="RunningNumberDate" EntityType="ProjectBaseVueModel.RunningNumberDate" />
-          <EntitySet Name="RunningNumberMonth" EntityType="ProjectBaseVueModel.RunningNumberMonth" />
-          <EntitySet Name="RunningNumberYear" EntityType="ProjectBaseVueModel.RunningNumberYear" />
           <EntitySet Name="Setting" EntityType="ProjectBaseVueModel.Setting" />
           <EntitySet Name="User" EntityType="ProjectBaseVueModel.User" />
           <EntitySet Name="UserCompany" EntityType="ProjectBaseVueModel.UserCompany" />
@@ -727,18 +603,6 @@
           <AssociationSet Name="FK_User_Role_Role" Association="ProjectBaseVueModel.FK_User_Role_Role">
             <End Role="Role" EntitySet="Role" />
             <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberDate_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberDate" EntitySet="RunningNumberDate" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberMonth_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberMonth" EntitySet="RunningNumberMonth" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RunningNumberYear_RunningNumber" Association="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber">
-            <End Role="RunningNumber" EntitySet="RunningNumber" />
-            <End Role="RunningNumberYear" EntitySet="RunningNumberYear" />
           </AssociationSet>
           <AssociationSet Name="FK_Table_1_User" Association="ProjectBaseVueModel.FK_Table_1_User">
             <End Role="User" EntitySet="User" />
@@ -955,24 +819,6 @@
           <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Lookup">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LookupGroup" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LookupKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LookupValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LookupInfo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="LookupInfo2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EditedDate" Type="DateTime" Precision="3" />
-          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -1031,60 +877,6 @@
           <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="UserRole" Relationship="ProjectBaseVueModel.FK_User_Role_Role" FromRole="Role" ToRole="UserRole" />
-        </EntityType>
-        <EntityType Name="RunningNumber">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RangeFromNumber" Type="Int32" />
-          <Property Name="RangeToNumber" Type="Int32" />
-          <Property Name="Format" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AdditionalTrans" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="EditedDate" Type="DateTime" Precision="3" />
-          <Property Name="EditedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="Deleted_By" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RunningNumberDate" Relationship="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberDate" />
-          <NavigationProperty Name="RunningNumberMonth" Relationship="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberMonth" />
-          <NavigationProperty Name="RunningNumberYear" Relationship="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber" FromRole="RunningNumber" ToRole="RunningNumberYear" />
-        </EntityType>
-        <EntityType Name="RunningNumberDate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
-          <Property Name="Date" Type="Int32" />
-          <Property Name="Month" Type="Int32" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="LastNumber" Type="Int32" />
-          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberDate_RunningNumber" FromRole="RunningNumberDate" ToRole="RunningNumber" />
-        </EntityType>
-        <EntityType Name="RunningNumberMonth">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
-          <Property Name="Month" Type="Int32" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="LastNumber" Type="Int32" />
-          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberMonth_RunningNumber" FromRole="RunningNumberMonth" ToRole="RunningNumber" />
-        </EntityType>
-        <EntityType Name="RunningNumberYear">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RunningNumberId" Type="Int64" Nullable="false" />
-          <Property Name="Year" Type="Int32" />
-          <Property Name="LastNumber" Type="Int32" />
-          <NavigationProperty Name="RunningNumber" Relationship="ProjectBaseVueModel.FK_RunningNumberYear_RunningNumber" FromRole="RunningNumberYear" ToRole="RunningNumber" />
         </EntityType>
         <EntityType Name="Setting">
           <Key>
@@ -1274,42 +1066,6 @@
             </Principal>
             <Dependent Role="UserRole">
               <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RunningNumberDate_RunningNumber">
-          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
-          <End Type="ProjectBaseVueModel.RunningNumberDate" Role="RunningNumberDate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberDate">
-              <PropertyRef Name="RunningNumberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RunningNumberMonth_RunningNumber">
-          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
-          <End Type="ProjectBaseVueModel.RunningNumberMonth" Role="RunningNumberMonth" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberMonth">
-              <PropertyRef Name="RunningNumberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RunningNumberYear_RunningNumber">
-          <End Type="ProjectBaseVueModel.RunningNumber" Role="RunningNumber" Multiplicity="1" />
-          <End Type="ProjectBaseVueModel.RunningNumberYear" Role="RunningNumberYear" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RunningNumber">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RunningNumberYear">
-              <PropertyRef Name="RunningNumberId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1567,25 +1323,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Lookup">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.Lookup">
-              <MappingFragment StoreEntitySet="Lookup">
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="LookupInfo2" ColumnName="LookupInfo2" />
-                <ScalarProperty Name="LookupInfo1" ColumnName="LookupInfo1" />
-                <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
-                <ScalarProperty Name="LookupKey" ColumnName="LookupKey" />
-                <ScalarProperty Name="LookupGroup" ColumnName="LookupGroup" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Menu">
             <EntityTypeMapping TypeName="ProjectBaseVueModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
@@ -1643,58 +1380,6 @@
                 <ScalarProperty Name="Modul" ColumnName="Modul" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RunningNumber">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumber">
-              <MappingFragment StoreEntitySet="RunningNumber">
-                <ScalarProperty Name="Deleted_By" ColumnName="Deleted_By" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="AdditionalTrans" ColumnName="AdditionalTrans" />
-                <ScalarProperty Name="Format" ColumnName="Format" />
-                <ScalarProperty Name="RangeToNumber" ColumnName="RangeToNumber" />
-                <ScalarProperty Name="RangeFromNumber" ColumnName="RangeFromNumber" />
-                <ScalarProperty Name="TransType" ColumnName="TransType" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RunningNumberDate">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberDate">
-              <MappingFragment StoreEntitySet="RunningNumberDate">
-                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RunningNumberMonth">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberMonth">
-              <MappingFragment StoreEntitySet="RunningNumberMonth">
-                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Month" ColumnName="Month" />
-                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RunningNumberYear">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.RunningNumberYear">
-              <MappingFragment StoreEntitySet="RunningNumberYear">
-                <ScalarProperty Name="LastNumber" ColumnName="LastNumber" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="RunningNumberId" ColumnName="RunningNumberId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

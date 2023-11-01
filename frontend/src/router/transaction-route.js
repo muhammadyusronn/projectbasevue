@@ -1,16 +1,5 @@
 export default [
   {
-    path: "/Approval/Index",
-    name: "ApprovalIndex",
-    component: () => import("@/components/Approval/Index.vue"),
-    meta: {
-      name: "ApprovalIndex",
-      menuTitle: "Approval",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
     path: "/Example",
     name: "Example",
     component: () => import("@/components/Example/Index.vue"),

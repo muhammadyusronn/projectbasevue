@@ -51,11 +51,11 @@ var constants = {
     var url = env.VUE_APP_API_URL;
     var url2 = env.VUE_APP_API2_URL;
 
-    props.$APP_NAME = "Project Base Vue";
-    props.$APP_SHORT_NAME = "DMS";
+    props.$APP_NAME = "E-Plantation Management System";
+    props.$APP_SHORT_NAME = "EPMS";
     props.$STATE_NAME = "pbv-state-";
     props.$DEFAULT_TIMER = 6000;
-    props.$BAR_BG_COLOR = "#e0af53";
+    props.$BAR_BG_COLOR = "#FFFFF";
     props.$BAR_TEXT_COLOR = "#000000"; //invertColor(props.$BAR_BG_COLOR, true);
 
     props.$OK = "OK";
@@ -68,47 +68,6 @@ var constants = {
     props.$API2_URL = url2;
     props.$AUTH_URL = url + "auth/menu"; //env.VUE_APP_API_URL + "auth/menu"
     props.$UTIL_URL = url + "util/"; //env.VUE_APP_API_URL + "util/"s
-
-    props.$LOOKUP_GROUP = {
-      DOC_CATEGORY_TYPE: "DOC_CATEGORY_TYPE",
-      DOC_CATEGORY_EXPIRY: "DOC_CATEGORY_EXPIRY",
-      STORAGE_LOCATION_TYPE: "STORAGE_LOCATION_TYPE",
-      REPORT_TYPE: "REPORT_TYPE",
-      DOCUMENT_STATUS: "DOCUMENT_STATUS",
-      MOVEMENT_REPORT_TYPE: "MOVEMENT_REPORT_TYPE",
-      APPROVAL_AS_MATRIX: "APPROVAL_AS_MATRIX",
-      VALIDITY_MATRIX: "VALIDITY_MATRIX",
-      DOCUMENT_TRANSFER_TYPE: "DOCUMENT_TRANSFER_TYPE",
-    };
-
-    props.$CATEGORY_STORAGE = {
-      MAIN: "MAIN",
-      DETAIL: "DETAIL",
-    };
-
-    props.$APPROVAL_STATUS = {
-      WAITING_FOR_APPROVAL: "WAITING FOR APPROVAL",
-      APPROVED: "APPROVED",
-      REJECTED: "REJECTED",
-    };
-
-    props.$TRANSACTION_TYPE = {
-      ORDER: "ORDER",
-      SHIPMENT: "SHIPMENT",
-      APPOINTMENT: "APPOINTMENT",
-    };
-
-    props.$STORAGE_LOCATION_CATEGORY = {
-      MAIN: "MAIN",
-      DETAIL: "DETAIL",
-    };
-
-    props.$TRANSFER_TYPE = {
-      WITHIN_STORAGE_LOCATION: "WITHIN STORAGE LOCATION",
-      ANOTHER_DEPT: "ANOTHER DEPT",
-      EXTERNAL: "EXTERNAL",
-    };
-
     props.$TYPE = ["Y", "N"];
   },
 };

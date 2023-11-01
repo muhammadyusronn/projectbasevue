@@ -22,28 +22,6 @@ export default [
     props: true,
   },
   {
-    path: "/Security/Index",
-    name: "SecurityIndex",
-    component: () => import("@/components/Security/Index.vue"),
-    meta: {
-      name: "SecurityIndex",
-      menuTitle: "Security",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/Security/Editor",
-    name: "SecurityEditor",
-    component: () => import("@/components/Security/Editor.vue"),
-    meta: {
-      name: "SecurityEditor",
-      menuTitle: "Security",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
     path: "/Location/Index",
     name: "LocationIndex",
     component: () => import("@/components/Location/Index.vue"),
@@ -66,73 +44,6 @@ export default [
     props: true,
   },
   {
-    path: "/Lookup/Index",
-    name: "LookupIndex",
-    component: () => import("@/components/Lookup/Index.vue"),
-    meta: {
-      name: "LookupIndex",
-      menuTitle: "Lookup",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/Lookup/Editor",
-    name: "LookupEditor",
-    component: () => import("@/components/Lookup/Editor.vue"),
-    meta: {
-      name: "LookupEditor",
-      menuTitle: "Lookup",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-
-  {
-    path: "/ApprovalMatrix/Index",
-    name: "ApprovalMatrixIndex",
-    component: () => import("@/components/ApprovalMatrix/Index.vue"),
-    meta: {
-      name: "ApprovalMatrixIndex",
-      menuTitle: "Approval Matrix",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/ApprovalMatrix/Editor",
-    name: "ApprovalMatrixEditor",
-    component: () => import("@/components/ApprovalMatrix/Editor.vue"),
-    meta: {
-      name: "ApprovalMatrixEditor",
-      menuTitle: "Approval Matrix",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/RunningNumber/Index",
-    name: "RunningNumberIndex",
-    component: () => import("@/components/RunningNumber/Index.vue"),
-    meta: {
-      name: "RunningNumberIndex",
-      menuTitle: "Running Number",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/RunningNumber/Editor",
-    name: "RunningNumberEditor",
-    component: () => import("@/components/RunningNumber/Editor.vue"),
-    meta: {
-      name: "RunningNumberEditor",
-      menuTitle: "Running Number",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
     path: "/Department/Index",
     name: "DepartmentIndex",
     component: () => import("@/components/Department/Index.vue"),
@@ -150,39 +61,6 @@ export default [
     meta: {
       name: "DepartmentEditor",
       menuTitle: "Department",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/StorageLocation/Editor",
-    name: "StorageLocationEditor",
-    component: () => import("@/components/StorageLocation/Editor.vue"),
-    meta: {
-      name: "StorageLocationEditor",
-      menuTitle: "Storage Location",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/ReleaseMatrix/Index",
-    name: "ReleaseMatrixIndex",
-    component: () => import("@/components/ReleaseMatrix/Index.vue"),
-    meta: {
-      name: "ReleaseMatrixIndex",
-      menuTitle: "Release Matrix",
-      requiresAuth: true,
-    },
-    props: true,
-  },
-  {
-    path: "/ReleaseMatrix/Editor",
-    name: "ReleaseMatrixEditor",
-    component: () => import("@/components/ReleaseMatrix/Editor.vue"),
-    meta: {
-      name: "ReleaseMatrixEditor",
-      menuTitle: "Release Matrix",
       requiresAuth: true,
     },
     props: true,

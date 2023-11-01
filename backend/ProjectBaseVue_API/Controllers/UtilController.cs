@@ -286,34 +286,6 @@ namespace ProjectBaseVue_API.Controllers
         //}
 
         [HttpGet]
-        [Route("lookup_sap_sync")]
-        public ResultData LookupSAPSync()
-        {
-            var result = new ResultData();
-            result.success = true;
-            result.message = Constants.OK;
-            result.data = null;
-
-            try
-            {
-                DataEntities db = new DataEntities();
-
-                var data = db.Lookup.Where(r => r.LookupGroup == "SAP_SYNC_SETTING").FirstOrDefault();
-                if (data == null)
-                    throw new Exception("Data not found");
-
-                result.data = data;
-            }
-            catch (Exception ex)
-            {
-                result.success = false;
-                result.message = ex.Message;
-            }
-
-            return result;
-        }
-
-        [HttpGet]
         [Route("version")]
         public ResultData GetWebVersion()
         {

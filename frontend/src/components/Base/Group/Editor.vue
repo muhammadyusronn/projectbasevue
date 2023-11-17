@@ -65,20 +65,21 @@
       <template #content>
         <div class="p-inputtext-sm p-fluid">
           <FormField
-            :labelName="$t('code')"
+            :labelName="$t('Group')"
             fieldName="Group_Code"
             v-model="header"
           >
-            <InputText
+            <CustomSelect
               name="Group_Code"
-              :placeholder="$t('code')"
               v-model="header.Group_Code"
-              type="text"
               v-if="header"
+              :url="$API_URL + 'list/jabatan'"
+              :minLength="0"
+              :filter="true"
               :disabled="mode == this.$FORM_MODE_VIEW"
+              :placeholder="$t('code')"
             />
           </FormField>
-
           <FormField
             :labelName="$t('description')"
             fieldName="Group_Description"
@@ -199,6 +200,7 @@ export default {
       id: 0,
       formEditable: true,
       dataModel: false,
+      group: null,
     };
   },
   methods: {

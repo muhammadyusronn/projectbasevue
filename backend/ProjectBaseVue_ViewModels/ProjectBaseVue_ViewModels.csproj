@@ -120,6 +120,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="CompanyDetailViewModel.cs" />
+    <Compile Include="ScheduleViewModel.cs" />
+    <Compile Include="JabatanViewModel.cs" />
+    <Compile Include="RegionViewModel.cs" />
+    <Compile Include="CountryViewModel.cs" />
+    <Compile Include="EstateViewModel.cs" />
     <Compile Include="DepartmentViewModel.cs" />
     <Compile Include="EmployeeViewModel.cs" />
     <Compile Include="CompanyViewModel.cs" />

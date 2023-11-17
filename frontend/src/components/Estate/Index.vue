@@ -1,8 +1,8 @@
-﻿<template>
+<template>
   <IndexBase
     @auth="onAuth($event)"
     action="Index"
-    controller="User"
+    controller="Estate"
   ></IndexBase>
 
   <Card>
@@ -10,7 +10,7 @@
       <Toolbar>
         <template #left>
           <div class="p-card-title">
-            {{ $t("user") }}
+            {{ $t("Estate") }}
           </div>
         </template>
       </Toolbar>
@@ -28,9 +28,7 @@
         :value="dataModel"
         :loading="!dataModel || loading"
         :paginator="true"
-        :rows="15"
-        scrollHeight="70vh"
-        wrapperClass="responsive-height"
+        :rows="10"
         :lazy="true"
         v-model:first="this.start"
         @state-restore="onStateRestore($event)"
@@ -86,11 +84,11 @@
             />
           </template>
         </Column>
-        <Column field="Username" :header="$t('Username')" :sortable="true">
+        <Column field="EstateCode" :header="$t('EstateCode')" :sortable="true">
           <template #filter="{ filterModel, filterCallback }">
             <InputText
               type="text"
-              :placeholder="$t('Username')"
+              :placeholder="$t('EstateCode')"
               v-if="filterModel"
               v-model="filterModel.value"
               @keydown.enter="filterCallback()"
@@ -98,11 +96,11 @@
             />
           </template>
         </Column>
-        <Column field="Full_Name" :header="$t('full_name')" :sortable="true">
+        <Column field="Name" :header="$t('Name')" :sortable="true">
           <template #filter="{ filterModel, filterCallback }">
             <InputText
               type="text"
-              :placeholder="$t('full_name')"
+              :placeholder="$t('Name')"
               v-if="filterModel"
               v-model="filterModel.value"
               @keydown.enter="filterCallback()"
@@ -110,178 +108,19 @@
             />
           </template>
         </Column>
-        <Column field="Email" :header="$t('email')" :sortable="true">
+        <Column field="isActive" :header="$t('Is Active')" :sortable="true">
           <template #filter="{ filterModel, filterCallback }">
             <InputText
               type="text"
-              :placeholder="$t('email')"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              class="p-column-filter p-inputtext-sm"
-            />
-          </template>
-        </Column>
-        <Column field="IsAdmin" :header="$t('is_admin')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <YNSelect
-              :placeholder="$t('is_admin')"
-              :useBinary="true"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @change="filterCallback()"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ data.IsAdmin }}
-          </template>
-        </Column>
-        <Column field="Use_AD" :header="$t('use_ad')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <YNSelect
-              :placeholder="$t('use_ad')"
-              :useBinary="true"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @change="filterCallback()"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ data.Use_AD }}
-          </template>
-        </Column>
-        <Column field="IsActive" :header="$t('Is Active')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <YNSelect
               :placeholder="$t('Is Active')"
-              :useBinary="true"
               v-if="filterModel"
               v-model="filterModel.value"
-              @change="filterCallback()"
+              @keydown.enter="filterCallback()"
+              class="p-column-filter p-inputtext-sm"
             />
           </template>
           <template #body="{ data }">
-            {{ data.IsActive }}
-          </template>
-        </Column>
-        <Column
-          field="CreatedDate"
-          :header="$t('created_date')"
-          dataType="date"
-          :sortable="true"
-        >
-          <template #filter="{ filterModel, filterCallback }">
-            <DatePicker
-              :placeholder="$t('created_date')"
-              dateFormat="dd/mm/yyyy"
-              inputMask="99/99/9999"
-              momentFormat="DD/MM/YYYY"
-              class="p-column-filter p-inputtext-sm"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ this.$formatDateTime(data.CreatedDate) }}
-          </template>
-        </Column>
-        <Column field="CreatedBy" :header="$t('created_by')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              type="text"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              class="p-column-filter p-inputtext-sm"
-              placeholder="Filter Created By"
-            />
-          </template>
-        </Column>
-        <Column
-          field="EditedDate"
-          :header="$t('edited_date')"
-          dataType="date"
-          :sortable="true"
-        >
-          <template #filter="{ filterModel, filterCallback }">
-            <DatePicker
-              dateFormat="dd/mm/yyyy"
-              inputMask="99/99/9999"
-              momentFormat="DD/MM/YYYY"
-              class="p-column-filter p-inputtext-sm"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              placeholder="Filter Edited Date"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ this.$formatDateTime(data.EditedDate) }}
-          </template>
-        </Column>
-        <Column field="EditedBy" :header="$t('edited_by')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              type="text"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              class="p-column-filter p-inputtext-sm"
-              placeholder="Filter Edited By"
-            />
-          </template>
-        </Column>
-        <Column field="IsDeleted" :header="$t('is_deleted')" :sortable="true">
-          <template #filter="{ filterModel, filterCallback }">
-            <YNSelect
-              :placeholder="$t('is_deleted')"
-              :useBinary="true"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @change="filterCallback()"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ data.IsDeleted }}
-          </template>
-        </Column>
-        <Column
-          field="DeletedDate"
-          :header="$t('deleted_date')"
-          :sortable="true"
-        >
-          <template #filter="{ filterModel, filterCallback }">
-            <DatePicker
-              dateFormat="dd/mm/yyyy"
-              inputMask="99/99/9999"
-              momentFormat="DD/MM/YYYY"
-              class="p-column-filter p-inputtext-sm"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              placeholder="Filter Edited Date"
-            />
-          </template>
-          <template #body="{ data }">
-            {{ this.$formatDateTime(data.DeletedDate) }}
-          </template>
-        </Column>
-        <Column
-          field="DeletedBy"
-          :header="$t('deleted_by')"
-          dataType="date"
-          :sortable="true"
-        >
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              type="text"
-              v-if="filterModel"
-              v-model="filterModel.value"
-              @keydown.enter="filterCallback()"
-              class="p-column-filter p-inputtext-sm"
-              placeholder="Filter Edited By"
-            />
+            {{ data.isActive == 1 ? "Active" : "Not Active" }}
           </template>
         </Column>
       </DataTable>
@@ -291,25 +130,21 @@
 
 <script>
 export default {
-  name: "User",
+  name: "Estate",
   data() {
     return {
       dataModel: null,
       loading: true,
       totalRecords: 0,
       start: 0,
-      stateKey: this.$STATE_NAME + "user-" + this.$store.getters.getUsername,
-      role: this.$store.getters.getRole,
+      stateKey: this.$STATE_NAME + "estate-" + this.$store.getters.getUsername,
       isAdmin: this.$store.getters.getIsAdmin,
-      isUser: this.$store.getters.getIsUser,
-      isTransporter: this.$store.getters.getIsTransporter,
-      isDriver: this.$store.getters.getIsDriver,
       sorts: null,
       lazyParams: {},
       filters: null,
       stateFilters: null,
-      editorPath: "/User/Editor",
-      dataUrl: "user/list",
+      editorPath: "/Estate/Editor",
+      dataUrl: "estate/list",
       canCreate: false,
       canEdit: false,
       canDelete: false,
@@ -362,14 +197,13 @@ export default {
         sorts: this.dataSort,
         filters: this.dataFilter,
       };
-      console.log(this.lazyParams);
+
       var self = this;
 
       this.$axios
         .post(this.$API_URL + this.dataUrl, this.lazyParams)
         .then((response) => {
           if (response.data.success) {
-            console.log(response);
             this.dataModel = response.data.data;
             this.totalRecords = response.data.totalRecords;
           } else {
@@ -377,7 +211,7 @@ export default {
               severity: "error",
               summary: "Error",
               detail: response.data.message,
-              life: 120000,
+              life: this.$DEFAULT_TIMER,
             });
           }
 
@@ -388,7 +222,7 @@ export default {
             severity: "error",
             summary: "Error",
             detail: err.message,
-            life: 120000,
+            life: this.$DEFAULT_TIMER,
           });
           self.loading = false;
         });

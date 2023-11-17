@@ -17,7 +17,7 @@ namespace ProjectBaseVue_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiAuthorize]
-    public class DepartmentController : ControllerBase
+    public class JabatanController : ControllerBase
     {
         DataEntities db = new DataEntities();
 
@@ -33,7 +33,7 @@ namespace ProjectBaseVue_API.Controllers
             int totalRecords = 0;
             int pageSize =20;
             int skip = request != null ? request.start : 0;
-            string orderBy = "a.id DESC";
+            string orderBy = "a.JabatanCode DESC";
             List<SqlParameter> parameters = new List<SqlParameter>(), parametert = new List<SqlParameter>();
 
             try
@@ -48,10 +48,10 @@ namespace ProjectBaseVue_API.Controllers
                 string query = @"SELECT 
                                     ROW_NUMBER() OVER(ORDER BY {1}) AS row_number,
                                     a.* 
-                                    FROM M_Department a 
+                                    FROM M_Jabatan a 
                                     WHERE 1=1 {0} ";
                 string whereQuery = "";
-                string totalQuery = "SELECT COUNT(a.Id) From M_Department a WHERE 1=1  {0}";
+                string totalQuery = "SELECT COUNT(a.JabatanCode) From M_Jabatan a WHERE 1=1  {0}";
                 if (request != null)
                 {
                     if (request.filters != null && request.filters.Count > 0)
@@ -98,12 +98,12 @@ namespace ProjectBaseVue_API.Controllers
 
                             sortList.Add(tableAlias + columnName + " " + sortBy);
                         }
-                        orderBy = String.Join(", ", sortList)+", "+tableAlias+ "Id " + sortBy;
+                        orderBy = String.Join(", ", sortList)+", "+tableAlias+ "JabatanCode " + sortBy;
                     }
                 }
-                string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "Id DESC" : orderBy));
+                string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "JabatanCode DESC" : orderBy));
                 string qwery = string.Format(baseQuery, fQuery, skip+1, skip+pageSize);
-                var data = db.Database.SqlQuery<DepartmentModel>(qwery, parameters.ToArray()).ToList();
+                var data = db.Database.SqlQuery<JabatanModel>(qwery, parameters.ToArray()).ToList();
 
                 foreach (SqlParameter prm in parameters)
                     parametert.Add(new SqlParameter(prm.ParameterName, prm.Value));
@@ -127,18 +127,18 @@ namespace ProjectBaseVue_API.Controllers
 
         }
 
-        [HttpGet("{id}")]
-        public ResultData GetData(long id)
+        [HttpGet("{JabatanCode}")]
+        public ResultData GetData(string JabatanCode)
         {
             var result = new ResultData();
 
             try
             {
-                var header = new DepartmentModel();
+                var header = new JabatanModel();
 
-                if (id.ToString() != "")
+                if (JabatanCode.ToString() != "")
                 {
-                    header = new DepartmentViewModel(db, id);
+                    header = new JabatanViewModel(db, JabatanCode);
                 }
 
                 result.data = new EditorHelper()
@@ -156,7 +156,7 @@ namespace ProjectBaseVue_API.Controllers
         }
 
         [HttpPost]
-        public ResultData Save(DepartmentModel modelData)
+        public ResultData Save(JabatanModel modelData)
         {
             var result = new ResultData();
             bool success = false;
@@ -166,53 +166,53 @@ namespace ProjectBaseVue_API.Controllers
             {
                 var user = HttpContext.GetUserData().UserData();
 
-                M_Department model;
+                M_Jabatan model;
                 if (modelData.mode == Constants.FORM_MODE_CREATE)
                 {
-                    var existedData = db.M_Department.Where(r =>
-                                            r.Id == modelData.Id
+                    var existedData = db.M_Jabatan.Where(r =>
+                                            r.JabatanCode == modelData.JabatanCode
                                         ).ToArray();
 
                     if (existedData != null && existedData.Length > 0)
                     {
-                        throw new Exception("Departement already exists!");
+                        throw new Exception("Jabatan already exists!");
                     }
 
-                    model = new M_Department();
+                    model = new M_Jabatan();
 
                     db.Entry(model).State = System.Data.Entity.EntityState.Added;
                 }
                 else
                 {
-                    model = db.M_Department.Find(modelData.Id);
+                    model = db.M_Jabatan.Find(modelData.JabatanCode);
 
                     if (modelData.mode == Constants.FORM_MODE_DELETE)
                     {
                        
                         if(model != null)
                         {
-                            model.IsDeleted = "Y";
-                            model.DeletedBy = modelData.DeletedBy;
-                            model.DeletedDate = modelData.DeletedDate;
+                            db.Entry(model).State = System.Data.Entity.EntityState.Deleted;
                         }
                     }
                     else if (modelData.mode == Constants.FORM_MODE_EDIT)
                     {
                         // EDIT PROSES
+                        db.Entry(model).State = System.Data.Entity.EntityState.Modified;
                     }
-                    db.Entry(model).State = System.Data.Entity.EntityState.Modified;
                 }
 
                 if (modelData.mode != Constants.FORM_MODE_DELETE)
                 {
                     //modelData.Id = (modelData.mode == Constants.FORM_MODE_CREATE) ? new Guid() : modelData.Id;
                     
-                    model.Code = modelData.Code;
-                    model.Description = modelData.Description;
+                    model.JabatanCode = modelData.JabatanCode;
+                    model.Name = modelData.Name;
                     model.CreatedBy = modelData.CreatedBy;
                     model.CreatedDate = modelData.CreatedDate;
-                    model.EditedBy = modelData.EditedBy;
-                    model.EditedDate = modelData.EditedDate;
+                    model.Seq = modelData.Seq;
+                    model.Area = modelData.Area;
+                    model.Priority = modelData.Priority;
+                    model.Granted = modelData.Granted;
                 }
 
                 using (var transaction = db.Database.BeginTransaction())
@@ -222,7 +222,7 @@ namespace ProjectBaseVue_API.Controllers
                        
                         db.SaveChanges();
                         transaction.Commit();
-                        message = "Departement has been saved";
+                        message = "Jabatan has been saved";
                         success = true;
 
                     }
@@ -248,7 +248,7 @@ namespace ProjectBaseVue_API.Controllers
 
         public class EditorHelper
         {
-            public DepartmentModel header { get; set; }
+            public JabatanModel header { get; set; }
         }
 
 

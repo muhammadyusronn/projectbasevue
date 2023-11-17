@@ -4,51 +4,7 @@
       <template #title>
         <Toolbar>
           <template #left>
-            <div class="p-card-title">[{{ mode }}] Department</div>
-            <div
-              style="margin-left: 10px"
-              v-if="mode != this.$FORM_MODE_CREATE"
-            >
-              <Button
-                type="button"
-                icon="pi pi-info"
-                @click="toggle"
-                aria:haspopup="true"
-                aria-controls="overlay_panel"
-                class="p-button-rounded p-button-outlined p-button-sm"
-              />
-
-              <OverlayPanel
-                ref="op"
-                appendTo="body"
-                :showCloseIcon="true"
-                id="overlay_panel"
-                style="width: 550px"
-                :breakpoints="{ '960px': '80vw' }"
-              >
-                <div class="grid field">
-                  <div class="row">
-                    <i class="pi pi-plus-circle" />
-                    {{ this.$formatDateTime(header.Created_date) }}
-                  </div>
-                  <div class="row">&nbsp;by {{ header.Created_Name }}</div>
-                </div>
-                <div class="grid field" v-if="header.Edited_Date">
-                  <div class="row">
-                    <i class="pi pi-pencil" />
-                    {{ this.$formatDateTime(header.Edited_Date) }}
-                  </div>
-                  <div class="row">&nbsp;by {{ header.Edited_Name }}</div>
-                </div>
-                <div class="grid field" v-if="header.Deleted_Date">
-                  <div class="row">
-                    <i class="pi pi-trash" />
-                    {{ this.$formatDateTime(header.Deleted_Date) }}
-                  </div>
-                  <div class="row">&nbsp;by {{ header.Deleted_By }}</div>
-                </div>
-              </OverlayPanel>
-            </div>
+            <div class="p-card-title">[{{ mode }}] Region</div>
           </template>
 
           <template #right>
@@ -83,15 +39,17 @@
           <div class="grid">
             <div class="col-6">
               <div class="field grid">
-                <label for="Code" class="col-4">{{ $t("code") }}</label>
+                <label for="RegionCode" class="col-4">{{
+                  $t("Region Code")
+                }}</label>
                 <div class="col-8 md-8">
                   <InputText
-                    name="Code"
-                    v-model="header.Code"
+                    name="RegionCode"
+                    v-model="header.RegionCode"
                     type="text"
-                    :placeholder="$t('code')"
+                    :placeholder="$t('RegionCode')"
                     v-if="header"
-                    :class="{ 'p-invalid': submitted && !header.Code }"
+                    :class="{ 'p-invalid': submitted && !header.RegionCode }"
                     :disabled="mode != this.$FORM_MODE_CREATE"
                     :readonly="mode != this.$FORM_MODE_CREATE"
                   />
@@ -99,28 +57,26 @@
                   <small
                     v-if="
                       header &&
-                      !header.Code &&
+                      !header.RegionCode &&
                       submitted &&
                       mode != this.$FORM_MODE_DELETE
                     "
                     class="p-error"
-                    >{{ $t("is_required").replace("Value", $t("code")) }}
+                    >{{ $t("is_required").replace("Value", $t("Region Code")) }}
                   </small>
                 </div>
               </div>
               <div class="field grid">
-                <label for="Description" class="col-4">{{
-                  $t("description")
-                }}</label>
+                <label for="Name" class="col-4">{{ $t("Name") }}</label>
                 <div class="col-8 md-8">
                   <InputText
-                    name="Description"
-                    v-model="header.Description"
+                    name="Name"
+                    v-model="header.Name"
                     required="true"
                     type="text"
-                    :placeholder="$t('description')"
+                    :placeholder="$t('Name')"
                     v-if="header"
-                    :class="{ 'p-invalid': submitted && !header.Description }"
+                    :class="{ 'p-invalid': submitted && !header.Name }"
                     :disabled="
                       mode != this.$FORM_MODE_CREATE &&
                       mode != this.$FORM_MODE_EDIT
@@ -130,13 +86,64 @@
                   <small
                     v-if="
                       header &&
-                      !header.Description &&
+                      !header.Name &&
                       submitted &&
                       mode != this.$FORM_MODE_DELETE
                     "
                     class="p-error"
-                    >{{ $t("is_required").replace("Value", $t("description")) }}
+                    >{{ $t("is_required").replace("Value", $t("Name")) }}
                   </small>
+                </div>
+              </div>
+              <div class="field grid">
+                <label for="CountryCode" class="col-4">{{
+                  $t("Country")
+                }}</label>
+                <div class="col-8 md-8">
+                  <CustomSelect
+                    name="CountryCode"
+                    v-model="header.CountryCode"
+                    v-if="header"
+                    :url="$API_URL + 'list/country'"
+                    :minLength="0"
+                    :filter="true"
+                    :disabled="
+                      mode != this.$FORM_MODE_CREATE &&
+                      mode != this.$FORM_MODE_EDIT
+                    "
+                    :placeholder="$t('Country')"
+                    :class="{ 'p-invalid': submitted && !header.CountryCode }"
+                    required="true"
+                  />
+                  <Skeleton v-else-if="!header" />
+                  <small
+                    v-if="
+                      header &&
+                      !header.CountryCode &&
+                      submitted &&
+                      mode != this.$FORM_MODE_DELETE
+                    "
+                    class="p-error"
+                    >{{ $t("is_required").replace("Value", $t("Country")) }}
+                  </small>
+                </div>
+              </div>
+              <div class="field grid">
+                <label for="isActive" class="col-4">{{
+                  $t("Is Active")
+                }}</label>
+                <div class="col-8 md-8">
+                  <Checkbox
+                    name="isActive"
+                    v-model="header.isActive"
+                    v-if="header"
+                    :binary="true"
+                    :disabled="
+                      mode != this.$FORM_MODE_CREATE &&
+                      mode != this.$FORM_MODE_EDIT
+                    "
+                  />
+                  <Skeleton v-else-if="!header" />
                 </div>
               </div>
             </div>
@@ -152,13 +159,13 @@ export default {
   name: "Editor",
   data() {
     return {
-      indexName: "DepartmentIndex",
-      url: this.$API_URL + "department/",
+      indexName: "RegionIndex",
+      url: this.$API_URL + "Region/",
       header: null,
       detail: null,
       mode: "",
       submitted: false,
-      id: 0,
+      RegionCode: "0",
       formEditable: true,
     };
   },
@@ -166,8 +173,10 @@ export default {
     getData() {
       var self = this;
       this.$axios
-        .get(this.url + this.id + "/" + this.mode)
+        .get(this.url + this.RegionCode + "/" + this.mode)
         .then((response) => {
+          response.data.data.header.isActive =
+            response.data.data.header.isActive == "1" ? true : false;
           self.header = response.data.data.header;
           self.header.mode = self.mode;
         })
@@ -176,6 +185,7 @@ export default {
         });
     },
     saveData() {
+      this.header.isActive = this.header.isActive ? 1 : 0;
       this.$emit("block-ui");
       var self = this;
       this.$axios
@@ -189,10 +199,7 @@ export default {
                   showToast: true,
                   severity: "success",
                   summary: "Data Deleted",
-                  detail:
-                    "Department " +
-                    self.header.Code +
-                    " has been deleted successfully",
+                  detail: "Region has been deleted successfully",
                   life: 3000,
                 },
               });
@@ -204,8 +211,8 @@ export default {
                   severity: "success",
                   summary: "Data Saved",
                   detail:
-                    "Department " +
-                    self.header.Code +
+                    "Region " +
+                    self.header.Name +
                     " has been saved successfully",
                   life: 3000,
                 },
@@ -229,14 +236,18 @@ export default {
       });
     },
     backToIndex() {
-      this.$router.push({ path: "/Department/Index" });
+      this.$router.push({ path: "/Region/Index" });
     },
     toggle(event) {
       this.$refs.op.toggle(event);
     },
     confirm(event) {
       this.submitted = true;
-      if (!this.header.Description || !this.header.Code) {
+      if (
+        !this.header.Name ||
+        !this.header.RegionCode ||
+        !this.header.CountryCode
+      ) {
         return;
       } else {
         this.$confirm.require({
@@ -284,7 +295,7 @@ export default {
   },
   created() {
     this.mode = this.$route.query.mode;
-    this.id = this.$route.query.id ?? 0;
+    this.RegionCode = this.$route.query.RegionCode ?? 0;
 
     this.getData();
   },

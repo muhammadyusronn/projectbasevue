@@ -39,10 +39,18 @@ namespace ProjectBaseVue_API.Controllers
 
             try
             {
-                string query = @"SELECT * 
-                                    FROM [User] A 
-                                    WHERE 1=1 {0}
-                                    ORDER BY {3} {2} {1}";
+                string baseQuery = @"
+                SELECT * FROM
+                ( 
+	               {0}
+                 ) as x 
+                WHERE x.row_number BETWEEN {1} and {2}
+                ";
+                string query = @"SELECT 
+                                    ROW_NUMBER() OVER(ORDER BY {1}) AS row_number,
+                                    a.* 
+                                    FROM [User] a 
+                                    WHERE 1=1 {0} ";
                 string whereQuery = "";
                 string totalQuery = "SELECT COUNT(A.Id) From [User] A WHERE 1=1  {0}";
 
@@ -81,27 +89,23 @@ namespace ProjectBaseVue_API.Controllers
                     if (request.sorts != null && request.sorts.Count > 0)
                     {
                         List<string> sortList = new List<string>();
+                        string tableAlias = "a.";
+                        string sortBy = "DESC";
                         for (int i = 0; i < request.sorts.Count; i++)
                         {
                             var sort = request.sorts[i];
                             string columnName = sort.field;
-                            string tableAlias = "A.";
-                            string sortBy = sort.order;
+                            sortBy = sort.order;
 
                             sortList.Add(tableAlias + columnName + " " + sortBy);
                         }
-                        orderBy = String.Join(", ", sortList);
+                        orderBy = String.Join(", ", sortList) + ", " + tableAlias + "id " + sortBy;
                     }
                 }
 
-                string fQuery = string.Format(query,
-                                        whereQuery,
-                                        (pageSize > 0 ? "FETCH NEXT " + pageSize.ToString() + " ROWS ONLY" : ""),
-                                        (skip > -1 ? "OFFSET " + skip.ToString() + " ROWS" : ""),
-                                        (string.IsNullOrEmpty(orderBy) ? "Created_Date DESC" : orderBy)
-                                    );
-
-                var data = db.Database.SqlQuery<UserModel>(fQuery, parameters.ToArray()).ToList();
+                string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "id DESC" : orderBy));
+                string qwery = string.Format(baseQuery, fQuery, skip + 1, skip + pageSize);
+                var data = db.Database.SqlQuery<UserModel>(qwery, parameters.ToArray()).ToList();
 
                 foreach (SqlParameter prm in parameters)
                     parametert.Add(new SqlParameter(prm.ParameterName, prm.Value));
@@ -146,9 +150,7 @@ namespace ProjectBaseVue_API.Controllers
                 result.data = new EditorHelper()
                 {
                     header = header,
-                    group = new UserGroupModel(),
-                    company = new UserCompanyModel(),
-                    //department = new UserDepartmentModel(),
+                    group = new UserGroupModel()
                 };
             }
             catch (Exception ex)
@@ -213,9 +215,11 @@ namespace ProjectBaseVue_API.Controllers
                     model.Full_Name = modelData.Full_Name;
                     model.Email = modelData.Email;
                     model.Use_AD = (modelData.Use_AD== "true") ? "Y" : "N";
+                    model.IsActive = (modelData.IsActive== "true") ? "Y" : "N";
                     model.IsAdmin = "N";
                     model.Location_Code = modelData.Location_Code;
-                    //model.CompanyAll = modelData.CompanyAll;
+                    model.Department = modelData.Department;
+                    model.EstateCode = modelData.EstateCode;
                     model.IsDeleted = "N";
                    
                     if (model.Use_AD == "Y" && string.IsNullOrEmpty(modelData.Password))
@@ -635,8 +639,6 @@ namespace ProjectBaseVue_API.Controllers
         {
             public UserModel header { get; set; }
             public UserGroupModel group { get; set; }
-            public UserCompanyModel company { get; set; }
-            //public UserDepartmentModel department { get; set; }
         }
     }
 }

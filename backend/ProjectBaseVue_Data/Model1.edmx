@@ -84,21 +84,6 @@
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
-          <Property Name="EditedDate" Type="datetime" />
-          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
-          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
-          <Property Name="DeletedDate" Type="datetime" />
-        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="id" />
@@ -193,6 +178,142 @@
           <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
           <Property Name="DeletedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="M_Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionCode" Type="varchar" MaxLength="10" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="char" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ProjectBaseVue.dbo.M_Country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="M_Country">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CountryCode" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="M_Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
+          <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeletedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="M_Employee">
+          <Key>
+            <PropertyRef Name="_key" />
+          </Key>
+          <Property Name="_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FC_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Sex" Type="varchar" MaxLength="50" />
+          <Property Name="Alamat" Type="varchar" MaxLength="500" />
+          <Property Name="DOB" Type="varchar" MaxLength="50" />
+          <Property Name="JobCode" Type="varchar" MaxLength="50" />
+          <Property Name="JobType" Type="varchar" MaxLength="50" />
+          <Property Name="StatusResign" Type="bit" />
+          <Property Name="Estate_Code" Type="varchar" MaxLength="50" />
+          <Property Name="StatusKaryawan" Type="varchar" MaxLength="50" />
+          <Property Name="estateCode_alias" Type="varchar" MaxLength="50" />
+          <Property Name="employeeFinger" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="M_Estate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionCode" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="ProfileName" Type="varchar(max)" />
+          <Property Name="PlantCode" Type="varchar" MaxLength="50" />
+          <Property Name="Storage" Type="varchar" MaxLength="50" />
+          <Property Name="NoophCode" Type="varchar" MaxLength="10" />
+          <Property Name="estateFingerCode" Type="int" />
+          <Property Name="templateCode" Type="varchar" MaxLength="10" />
+          <Property Name="isActive" Type="tinyint" />
+          <Property Name="estateAlias" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="M_FC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FCCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Alamat" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="50" />
+          <Property Name="estateCodealias" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="M_incidentType">
+          <Key>
+            <PropertyRef Name="_key" />
+            <PropertyRef Name="incidentCode" />
+          </Key>
+          <Property Name="_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="incidentCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="incidentName" Type="varchar(max)" />
+          <Property Name="incidentNameEng" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="M_Jabatan">
+          <Key>
+            <PropertyRef Name="JabatanCode" />
+          </Key>
+          <Property Name="JabatanCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="CreatedBy" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="varchar(max)" />
+          <Property Name="Seq" Type="varchar" MaxLength="50" />
+          <Property Name="Area" Type="varchar" MaxLength="50" />
+          <Property Name="Priority" Type="int" />
+          <Property Name="Granted" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="M_JobCode">
+          <Key>
+            <PropertyRef Name="_key" />
+          </Key>
+          <Property Name="_key" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobCode" Type="varchar(max)" />
+          <Property Name="JobType" Type="varchar" MaxLength="50" />
+          <Property Name="isEditable" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="M_Region">
+          <Key>
+            <PropertyRef Name="RegionCode" />
+          </Key>
+          <Property Name="RegionCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="isActive" Type="tinyint" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -258,6 +379,71 @@
           <Property Name="Code" Type="varchar" MaxLength="100" />
           <Property Name="Value" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="T_IncidentData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentID" Type="varchar(max)" />
+          <Property Name="IncidentDate" Type="date" />
+          <Property Name="IncidentTime" Type="time" Precision="7" />
+          <Property Name="IncidentCode" Type="varchar" MaxLength="30" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="10" />
+          <Property Name="Block" Type="varchar" MaxLength="10" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Flag" Type="varchar" MaxLength="5" />
+          <Property Name="InputBy" Type="varchar" MaxLength="50" />
+          <Property Name="Latitude" Type="varchar" MaxLength="50" />
+          <Property Name="Longitude" Type="varchar" MaxLength="50" />
+          <Property Name="Close" Type="varchar" MaxLength="5" />
+          <Property Name="LostBunches" Type="int" />
+          <Property Name="RecoverBunches" Type="int" />
+          <Property Name="TotalThief" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="T_IncidentDataDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IncidentDetailID" Type="varchar(max)" />
+          <Property Name="IncidentID" Type="varchar(max)" />
+          <Property Name="IncidentDetailDate" Type="date" />
+          <Property Name="IncidentDetailTime" Type="time" Precision="7" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="LostBunches" Type="int" />
+          <Property Name="RecoverBunches" Type="int" />
+          <Property Name="TotalThief" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ProjectBaseVue.dbo.T_LocationData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="T_LocationData">
+          <Property Name="Latitude" Type="varchar(max)" />
+          <Property Name="Longitude" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeCode" Type="varchar" MaxLength="50" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="50" />
+          <Property Name="CaptureDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="Counter" Type="varchar" MaxLength="2" />
+          <Property Name="Shift" Type="int" />
+        </EntityType>-->
+        <EntityType Name="T_ScheduleData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScheduleID" Type="varchar" MaxLength="150" />
+          <Property Name="ScheduleDate" Type="date" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="10" />
+          <Property Name="TimeStart" Type="time" Precision="7" />
+          <Property Name="TimeEnd" Type="time" Precision="7" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -268,7 +454,7 @@
           <Property Name="Password" Type="varchar" MaxLength="150" />
           <Property Name="Email" Type="varchar" MaxLength="80" />
           <Property Name="Location_Code" Type="varchar" MaxLength="50" />
-          <Property Name="DepartmentCode" Type="varchar" MaxLength="50" />
+          <Property Name="Department" Type="varchar" MaxLength="50" />
           <Property Name="IsAdmin" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Use_AD" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
@@ -280,21 +466,8 @@
           <Property Name="IsDeleted" Type="varchar" MaxLength="1" />
           <Property Name="DeletedDate" Type="datetime" />
           <Property Name="DeletedBy" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="UserCompany">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="bigint" Nullable="false" />
-          <Property Name="CompanyCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreatedDate" Type="datetime" />
-          <Property Name="CreatedBy" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="EditedDate" Type="datetime" />
-          <Property Name="EditedBy" Type="varchar" MaxLength="250" />
-          <Property Name="IsDeleted" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="DeletedDate" Type="datetime" />
-          <Property Name="DeletedBy" Type="varchar" MaxLength="250" />
+          <Property Name="EstateCode" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -467,42 +640,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserCompany_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserCompany" Type="Self.UserCompany" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserCompany">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProjectBaseVueModelStoreContainer">
           <EntitySet Name="APISetting" EntityType="Self.APISetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Changelog" EntityType="Self.Changelog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChangelogDetail" EntityType="Self.ChangelogDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDetail" EntityType="Self.CompanyDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Example" EntityType="Self.Example" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExampleDetail" EntityType="Self.ExampleDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupMenu" EntityType="Self.GroupMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Company" EntityType="Self.M_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Department" EntityType="Self.M_Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Employee" EntityType="Self.M_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Estate" EntityType="Self.M_Estate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_FC" EntityType="Self.M_FC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_incidentType" EntityType="Self.M_incidentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Jabatan" EntityType="Self.M_Jabatan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_JobCode" EntityType="Self.M_JobCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Region" EntityType="Self.M_Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationLog" EntityType="Self.NotificationLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestLog" EntityType="Self.RequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_IncidentData" EntityType="Self.T_IncidentData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_IncidentDataDetail" EntityType="Self.T_IncidentDataDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_ScheduleData" EntityType="Self.T_ScheduleData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserCompany" EntityType="Self.UserCompany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroup" EntityType="Self.UserGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserPassLog" EntityType="Self.UserPassLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserToken" EntityType="Self.UserToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M_Country" EntityType="Self.M_Country" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [M_Country].[Id] AS [Id], 
+    [M_Country].[CountryCode] AS [CountryCode], 
+    [M_Country].[CountryName] AS [CountryName], 
+    [M_Country].[CreatedBy] AS [CreatedBy], 
+    [M_Country].[CreatedDate] AS [CreatedDate], 
+    [M_Country].[UpdatedBy] AS [UpdatedBy], 
+    [M_Country].[UpdatedDate] AS [UpdatedDate], 
+    [M_Country].[IsActive] AS [IsActive]
+    FROM [dbo].[M_Country] AS [M_Country]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_ChangelogDetail_Changelog" Association="Self.FK_ChangelogDetail_Changelog">
             <End Role="Changelog" EntitySet="Changelog" />
             <End Role="ChangelogDetail" EntitySet="ChangelogDetail" />
@@ -543,10 +726,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
-          <AssociationSet Name="FK_UserCompany_User" Association="Self.FK_UserCompany_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserCompany" EntitySet="UserCompany" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -558,24 +737,35 @@
           <EntitySet Name="ChangelogDetail" EntityType="ProjectBaseVueModel.ChangelogDetail" />
           <EntitySet Name="Company" EntityType="ProjectBaseVueModel.Company" />
           <EntitySet Name="CompanyDetail" EntityType="ProjectBaseVueModel.CompanyDetail" />
-          <EntitySet Name="Department" EntityType="ProjectBaseVueModel.Department" />
           <EntitySet Name="Employees" EntityType="ProjectBaseVueModel.Employees" />
           <EntitySet Name="Example" EntityType="ProjectBaseVueModel.Example" />
           <EntitySet Name="ExampleDetail" EntityType="ProjectBaseVueModel.ExampleDetail" />
           <EntitySet Name="Group" EntityType="ProjectBaseVueModel.Group" />
           <EntitySet Name="GroupMenu" EntityType="ProjectBaseVueModel.GroupMenu" />
           <EntitySet Name="Location" EntityType="ProjectBaseVueModel.Location" />
+          <EntitySet Name="M_Company" EntityType="ProjectBaseVueModel.M_Company" />
+          <EntitySet Name="M_Department" EntityType="ProjectBaseVueModel.M_Department" />
+          <EntitySet Name="M_Employee" EntityType="ProjectBaseVueModel.M_Employee" />
+          <EntitySet Name="M_Estate" EntityType="ProjectBaseVueModel.M_Estate" />
+          <EntitySet Name="M_FC" EntityType="ProjectBaseVueModel.M_FC" />
+          <EntitySet Name="M_incidentType" EntityType="ProjectBaseVueModel.M_incidentType" />
+          <EntitySet Name="M_Jabatan" EntityType="ProjectBaseVueModel.M_Jabatan" />
+          <EntitySet Name="M_JobCode" EntityType="ProjectBaseVueModel.M_JobCode" />
+          <EntitySet Name="M_Region" EntityType="ProjectBaseVueModel.M_Region" />
           <EntitySet Name="Menu" EntityType="ProjectBaseVueModel.Menu" />
           <EntitySet Name="NotificationLog" EntityType="ProjectBaseVueModel.NotificationLog" />
           <EntitySet Name="RequestLog" EntityType="ProjectBaseVueModel.RequestLog" />
           <EntitySet Name="Role" EntityType="ProjectBaseVueModel.Role" />
           <EntitySet Name="Setting" EntityType="ProjectBaseVueModel.Setting" />
+          <EntitySet Name="T_IncidentData" EntityType="ProjectBaseVueModel.T_IncidentData" />
+          <EntitySet Name="T_IncidentDataDetail" EntityType="ProjectBaseVueModel.T_IncidentDataDetail" />
+          <EntitySet Name="T_ScheduleData" EntityType="ProjectBaseVueModel.T_ScheduleData" />
           <EntitySet Name="User" EntityType="ProjectBaseVueModel.User" />
-          <EntitySet Name="UserCompany" EntityType="ProjectBaseVueModel.UserCompany" />
           <EntitySet Name="UserGroup" EntityType="ProjectBaseVueModel.UserGroup" />
           <EntitySet Name="UserPassLog" EntityType="ProjectBaseVueModel.UserPassLog" />
           <EntitySet Name="UserRole" EntityType="ProjectBaseVueModel.UserRole" />
           <EntitySet Name="UserToken" EntityType="ProjectBaseVueModel.UserToken" />
+          <EntitySet Name="M_Country" EntityType="ProjectBaseVueModel.M_Country" />
           <AssociationSet Name="FK_ChangelogDetail_Changelog" Association="ProjectBaseVueModel.FK_ChangelogDetail_Changelog">
             <End Role="Changelog" EntitySet="Changelog" />
             <End Role="ChangelogDetail" EntitySet="ChangelogDetail" />
@@ -615,10 +805,6 @@
           <AssociationSet Name="FK_User_Role_User" Association="ProjectBaseVueModel.FK_User_Role_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserRole" EntitySet="UserRole" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserCompany_User" Association="ProjectBaseVueModel.FK_UserCompany_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserCompany" EntitySet="UserCompany" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="APISetting">
@@ -703,21 +889,6 @@
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Company" Relationship="ProjectBaseVueModel.FK_Company_Detail_Company" FromRole="CompanyDetail" ToRole="Company" />
-        </EntityType>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EditedDate" Type="DateTime" Precision="3" />
-          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -819,6 +990,123 @@
           <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="M_Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Employee">
+          <Key>
+            <PropertyRef Name="C_key" />
+          </Key>
+          <Property Name="C_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Alamat" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="JobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusResign" Type="Boolean" />
+          <Property Name="Estate_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StatusKaryawan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estateCode_alias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employeeFinger" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_Estate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlantCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Storage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NoophCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estateFingerCode" Type="Int32" />
+          <Property Name="templateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Byte" />
+          <Property Name="estateAlias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_FC">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FCCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Alamat" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EstateCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estateCodealias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="M_incidentType">
+          <Key>
+            <PropertyRef Name="C_key" />
+            <PropertyRef Name="incidentCode" />
+          </Key>
+          <Property Name="C_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="incidentCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="incidentName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="incidentNameEng" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_Jabatan">
+          <Key>
+            <PropertyRef Name="JabatanCode" />
+          </Key>
+          <Property Name="JabatanCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Seq" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Priority" Type="Int32" />
+          <Property Name="Granted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="M_JobCode">
+          <Key>
+            <PropertyRef Name="C_key" />
+          </Key>
+          <Property Name="C_key" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isEditable" Type="Byte" />
+        </EntityType>
+        <EntityType Name="M_Region">
+          <Key>
+            <PropertyRef Name="RegionCode" />
+          </Key>
+          <Property Name="RegionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Byte" />
+          <Property Name="CountryCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="Menu">
           <Key>
             <PropertyRef Name="Id" />
@@ -886,6 +1174,59 @@
           <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Value" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="T_IncidentData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDate" Type="DateTime" Precision="0" />
+          <Property Name="IncidentTime" Type="Time" Precision="7" />
+          <Property Name="IncidentCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="EstateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Block" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="Flag" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="InputBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Close" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="LostBunches" Type="Int32" />
+          <Property Name="RecoverBunches" Type="Int32" />
+          <Property Name="TotalThief" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="T_IncidentDataDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IncidentDetailID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentID" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IncidentDetailDate" Type="DateTime" Precision="0" />
+          <Property Name="IncidentDetailTime" Type="Time" Precision="7" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="LostBunches" Type="Int32" />
+          <Property Name="RecoverBunches" Type="Int32" />
+          <Property Name="TotalThief" Type="Int32" />
+        </EntityType>
+        <EntityType Name="T_ScheduleData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduleID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="0" />
+          <Property Name="EstateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TimeStart" Type="Time" Precision="7" />
+          <Property Name="TimeEnd" Type="Time" Precision="7" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -896,7 +1237,7 @@
           <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Location_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DepartmentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IsAdmin" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Use_AD" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -908,26 +1249,11 @@
           <Property Name="IsDeleted" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="DeletedDate" Type="DateTime" Precision="3" />
           <Property Name="DeletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserGroup" Relationship="ProjectBaseVueModel.FK_Table_1_User" FromRole="User" ToRole="UserGroup" />
           <NavigationProperty Name="UserPassLog" Relationship="ProjectBaseVueModel.FK_User_Pass_Log_User" FromRole="User" ToRole="UserPassLog" />
           <NavigationProperty Name="UserRole" Relationship="ProjectBaseVueModel.FK_User_Role_User" FromRole="User" ToRole="UserRole" />
-          <NavigationProperty Name="UserCompany" Relationship="ProjectBaseVueModel.FK_UserCompany_User" FromRole="User" ToRole="UserCompany" />
-        </EntityType>
-        <EntityType Name="UserCompany">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int64" Nullable="false" />
-          <Property Name="CompanyCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EditedDate" Type="DateTime" Precision="3" />
-          <Property Name="EditedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="IsDeleted" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="User" Relationship="ProjectBaseVueModel.FK_UserCompany_User" FromRole="UserCompany" ToRole="User" />
         </EntityType>
         <EntityType Name="UserGroup">
           <Key>
@@ -984,6 +1310,23 @@
           <Property Name="Active" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="M_Country">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="CountryCode" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="CreatedDate" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Byte" />
         </EntityType>
         <Association Name="FK_ChangelogDetail_Changelog">
           <End Type="ProjectBaseVueModel.Changelog" Role="Changelog" Multiplicity="1" />
@@ -1105,18 +1448,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserCompany_User">
-          <End Type="ProjectBaseVueModel.User" Role="User" Multiplicity="1" />
-          <End Type="ProjectBaseVueModel.UserCompany" Role="UserCompany" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserCompany">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1203,22 +1534,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
                 <ScalarProperty Name="Company_Id" ColumnName="Company_Id" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Department">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1323,6 +1638,131 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="M_Company">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Company">
+              <MappingFragment StoreEntitySet="M_Company">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Department">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Department">
+              <MappingFragment StoreEntitySet="M_Department">
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Employee">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Employee">
+              <MappingFragment StoreEntitySet="M_Employee">
+                <ScalarProperty Name="employeeFinger" ColumnName="employeeFinger" />
+                <ScalarProperty Name="estateCode_alias" ColumnName="estateCode_alias" />
+                <ScalarProperty Name="StatusKaryawan" ColumnName="StatusKaryawan" />
+                <ScalarProperty Name="Estate_Code" ColumnName="Estate_Code" />
+                <ScalarProperty Name="StatusResign" ColumnName="StatusResign" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FC_Code" ColumnName="FC_Code" />
+                <ScalarProperty Name="Employee_code" ColumnName="Employee_code" />
+                <ScalarProperty Name="C_key" ColumnName="_key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Estate">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Estate">
+              <MappingFragment StoreEntitySet="M_Estate">
+                <ScalarProperty Name="estateAlias" ColumnName="estateAlias" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="templateCode" ColumnName="templateCode" />
+                <ScalarProperty Name="estateFingerCode" ColumnName="estateFingerCode" />
+                <ScalarProperty Name="NoophCode" ColumnName="NoophCode" />
+                <ScalarProperty Name="Storage" ColumnName="Storage" />
+                <ScalarProperty Name="PlantCode" ColumnName="PlantCode" />
+                <ScalarProperty Name="ProfileName" ColumnName="ProfileName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EstateCode" ColumnName="EstateCode" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_FC">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_FC">
+              <MappingFragment StoreEntitySet="M_FC">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="estateCodealias" ColumnName="estateCodealias" />
+                <ScalarProperty Name="EstateCode" ColumnName="EstateCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Alamat" ColumnName="Alamat" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FCCode" ColumnName="FCCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_incidentType">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_incidentType">
+              <MappingFragment StoreEntitySet="M_incidentType">
+                <ScalarProperty Name="incidentNameEng" ColumnName="incidentNameEng" />
+                <ScalarProperty Name="incidentName" ColumnName="incidentName" />
+                <ScalarProperty Name="incidentCode" ColumnName="incidentCode" />
+                <ScalarProperty Name="C_key" ColumnName="_key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Jabatan">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Jabatan">
+              <MappingFragment StoreEntitySet="M_Jabatan">
+                <ScalarProperty Name="Granted" ColumnName="Granted" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JabatanCode" ColumnName="JabatanCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_JobCode">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_JobCode">
+              <MappingFragment StoreEntitySet="M_JobCode">
+                <ScalarProperty Name="isEditable" ColumnName="isEditable" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="JobCode" ColumnName="JobCode" />
+                <ScalarProperty Name="C_key" ColumnName="_key" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Region">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Region">
+              <MappingFragment StoreEntitySet="M_Region">
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RegionCode" ColumnName="RegionCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Menu">
             <EntityTypeMapping TypeName="ProjectBaseVueModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
@@ -1393,9 +1833,67 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="T_IncidentData">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.T_IncidentData">
+              <MappingFragment StoreEntitySet="T_IncidentData">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="TotalThief" ColumnName="TotalThief" />
+                <ScalarProperty Name="RecoverBunches" ColumnName="RecoverBunches" />
+                <ScalarProperty Name="LostBunches" ColumnName="LostBunches" />
+                <ScalarProperty Name="Close" ColumnName="Close" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="InputBy" ColumnName="InputBy" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="EstateCode" ColumnName="EstateCode" />
+                <ScalarProperty Name="IncidentCode" ColumnName="IncidentCode" />
+                <ScalarProperty Name="IncidentTime" ColumnName="IncidentTime" />
+                <ScalarProperty Name="IncidentDate" ColumnName="IncidentDate" />
+                <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_IncidentDataDetail">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.T_IncidentDataDetail">
+              <MappingFragment StoreEntitySet="T_IncidentDataDetail">
+                <ScalarProperty Name="TotalThief" ColumnName="TotalThief" />
+                <ScalarProperty Name="RecoverBunches" ColumnName="RecoverBunches" />
+                <ScalarProperty Name="LostBunches" ColumnName="LostBunches" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IncidentDetailTime" ColumnName="IncidentDetailTime" />
+                <ScalarProperty Name="IncidentDetailDate" ColumnName="IncidentDetailDate" />
+                <ScalarProperty Name="IncidentID" ColumnName="IncidentID" />
+                <ScalarProperty Name="IncidentDetailID" ColumnName="IncidentDetailID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_ScheduleData">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.T_ScheduleData">
+              <MappingFragment StoreEntitySet="T_ScheduleData">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TimeEnd" ColumnName="TimeEnd" />
+                <ScalarProperty Name="TimeStart" ColumnName="TimeStart" />
+                <ScalarProperty Name="EstateCode" ColumnName="EstateCode" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="ProjectBaseVueModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="EstateCode" ColumnName="EstateCode" />
                 <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
                 <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
@@ -1407,28 +1905,12 @@
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Use_AD" ColumnName="Use_AD" />
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
-                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Location_Code" ColumnName="Location_Code" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Full_Name" ColumnName="Full_Name" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserCompany">
-            <EntityTypeMapping TypeName="ProjectBaseVueModel.UserCompany">
-              <MappingFragment StoreEntitySet="UserCompany">
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1484,6 +1966,20 @@
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M_Country">
+            <EntityTypeMapping TypeName="ProjectBaseVueModel.M_Country">
+              <MappingFragment StoreEntitySet="M_Country">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

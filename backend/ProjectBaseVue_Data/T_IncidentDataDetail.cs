@@ -12,19 +12,18 @@ namespace ProjectBaseVue_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class UserCompany
+    public partial class T_IncidentDataDetail
     {
-        public long Id { get; set; }
-        public long UserId { get; set; }
-        public string CompanyCode { get; set; }
+        public int Id { get; set; }
+        public string IncidentDetailID { get; set; }
+        public string IncidentID { get; set; }
+        public Nullable<System.DateTime> IncidentDetailDate { get; set; }
+        public Nullable<System.TimeSpan> IncidentDetailTime { get; set; }
+        public string Description { get; set; }
+        public string FileName { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> EditedDate { get; set; }
-        public string EditedBy { get; set; }
-        public string IsDeleted { get; set; }
-        public Nullable<System.DateTime> DeletedDate { get; set; }
-        public string DeletedBy { get; set; }
-    
-        public virtual User User { get; set; }
+        public Nullable<int> LostBunches { get; set; }
+        public Nullable<int> RecoverBunches { get; set; }
+        public Nullable<int> TotalThief { get; set; }
     }
 }

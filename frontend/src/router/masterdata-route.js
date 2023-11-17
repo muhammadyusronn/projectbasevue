@@ -65,4 +65,81 @@ export default [
     },
     props: true,
   },
+  {
+    path: "/Estate/Index",
+    name: "EstateIndex",
+    component: () => import("@/components/Estate/Index.vue"),
+    meta: {
+      name: "EstateIndex",
+      menuTitle: "Estate",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Estate/Editor",
+    name: "EstateEditor",
+    component: () => import("@/components/Estate/Editor.vue"),
+    meta: {
+      name: "EstateEditor",
+      menuTitle: "Estate",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Country/Index",
+    name: "CountryIndex",
+    component: () => import("@/components/Country/Index.vue"),
+    meta: {
+      name: "CountryIndex",
+      menuTitle: "Country",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Region/Index",
+    name: "RegionIndex",
+    component: () => import("@/components/Region/Index.vue"),
+    meta: {
+      name: "RegionIndex",
+      menuTitle: "Region",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Region/Editor",
+    name: "RegionEditor",
+    component: () => import("@/components/Region/Editor.vue"),
+    meta: {
+      name: "RegionEditor",
+      menuTitle: "Region",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Jabatan/Index",
+    name: "JabatanIndex",
+    component: () => import("@/components/Jabatan/Index.vue"),
+    meta: {
+      name: "JabatanIndex",
+      menuTitle: "Jabatan",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Jabatan/Editor",
+    name: "JabatanEditor",
+    component: () => import("@/components/Jabatan/Editor.vue"),
+    meta: {
+      name: "JabatanEditor",
+      menuTitle: "Jabatan",
+      requiresAuth: true,
+    },
+    props: true,
+  },
 ];

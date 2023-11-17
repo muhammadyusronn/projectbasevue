@@ -237,32 +237,32 @@ namespace ProjectBaseVue_API.Controllers
         {
             int fromIdx = page > 0 ? (page * 10) : 0;
             int toIdx = 10;
-            var listData = db.Department.Where(r => 1 == 2);
+            var listData = db.M_Department.Where(r => 1 == 2);
 
             if (init)
             {
-                listData = db.Department
+                listData = db.M_Department
                 .Where
                 (
                     r =>
-                    (string.IsNullOrEmpty(q) || r.Id.ToString() == q)
+                    (string.IsNullOrEmpty(q) || r.Code.ToString() == q)
                 )
-                .OrderBy(r => r.Id);
+                .OrderBy(r => r.Description);
             }
             else
             {
-                listData = db.Department
+                listData = db.M_Department
                 .Where
                 (
                     r =>
                     (string.IsNullOrEmpty(q) || ("[" + r.Code + "] " + r.Description).ToUpper().Contains(q.ToUpper())) &&
                     r.IsDeleted != "Y"
                 )
-                .OrderBy(r => r.Id);
+                .OrderBy(r => r.Description);
             }
             var data = listData.Skip(fromIdx)
                 .Take(toIdx)
-                .Select(r => new { id = r.Id, text = "[" + r.Code + "] " + r.Description, nama = r.Description })
+                .Select(r => new { id = r.Code, text = "[" + r.Code + "] " + r.Description, nama = r.Description })
                 .ToList();
 
             return new { items = data };
@@ -385,6 +385,200 @@ namespace ProjectBaseVue_API.Controllers
             return new { items = data };
         }
 
+        [HttpGet]
+        [Route("jabatan")]
+        public object JabatanList(string q = "", int page = 0, bool init = false)
+        {
+            int fromIdx = page > 0 ? (page * 10) : 0;
+            int toIdx = 10;
+            var listData = db.M_Jabatan.Where(r => 1 == 2);
+
+            if (init)
+            {
+                listData = db.M_Jabatan
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (q == r.JabatanCode.ToString()))
+                )
+                .OrderBy(r => r.JabatanCode);
+            }
+            else
+            {
+                listData = db.M_Jabatan
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (r.Name).ToUpper().Contains(q.ToUpper()))
+
+                )
+                .OrderBy(r => r.JabatanCode);
+            }
+
+            var data = listData.Skip(fromIdx)
+                .Take(toIdx)
+                .Select(r => new { id = r.JabatanCode, text = r.Name })
+                .Distinct()
+                .ToList();
+
+            return new { items = data };
+        }
+
+        [HttpGet]
+        [Route("estate")]
+        public object EstateList(string q = "", int page = 0, bool init = false)
+        {
+            int fromIdx = page > 0 ? (page * 10) : 0;
+            int toIdx = 10;
+            var listData = db.M_Estate.Where(r => 1 == 2);
+
+            if (init)
+            {
+                listData = db.M_Estate
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (q == r.EstateCode.ToString()))
+                )
+                .OrderBy(r => r.Name);
+            }
+            else
+            {
+                listData = db.M_Estate
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (r.Name).ToUpper().Contains(q.ToUpper()))
+
+                )
+                .OrderBy(r => r.Name);
+            }
+
+            var data = listData.Skip(fromIdx)
+                .Take(toIdx)
+                .Select(r => new { id = r.EstateCode, text = r.Name })
+                .Distinct()
+                .ToList();
+
+            return new { items = data };
+        }
+
+        [HttpGet]
+        [Route("region")]
+        public object RegionList(string q = "", int page = 0, bool init = false)
+        {
+            int fromIdx = page > 0 ? (page * 10) : 0;
+            int toIdx = 10;
+            var listData = db.M_Region.Where(r => 1 == 2);
+
+            if (init)
+            {
+                listData = db.M_Region
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (q == r.RegionCode.ToString()))
+                )
+                .OrderBy(r => r.Name);
+            }
+            else
+            {
+                listData = db.M_Region
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (r.Name).ToUpper().Contains(q.ToUpper()))
+
+                )
+                .OrderBy(r => r.Name);
+            }
+
+            var data = listData.Skip(fromIdx)
+                .Take(toIdx)
+                .Select(r => new { id = r.RegionCode, text = r.Name })
+                .Distinct()
+                .ToList();
+
+            return new { items = data };
+        }
+
+        [HttpGet]
+        [Route("company")]
+        public object CompanyList(string q = "", int page = 0, bool init = false)
+        {
+            int fromIdx = page > 0 ? (page * 10) : 0;
+            int toIdx = 10;
+            var listData = db.M_Company.Where(r => 1 == 2);
+
+            if (init)
+            {
+                listData = db.M_Company
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (q == r.CompanyCode.ToString()))
+                )
+                .OrderBy(r => r.Name);
+            }
+            else
+            {
+                listData = db.M_Company
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (r.Name).ToUpper().Contains(q.ToUpper()))
+
+                )
+                .OrderBy(r => r.Name);
+            }
+
+            var data = listData.Skip(fromIdx)
+                .Take(toIdx)
+                .Select(r => new { id = r.CompanyCode, text = r.Name })
+                .Distinct()
+                .ToList();
+
+            return new { items = data };
+        }
+
+        [HttpGet]
+        [Route("country")]
+        public object CountryList(string q = "", int page = 0, bool init = false)
+        {
+            int fromIdx = page > 0 ? (page * 10) : 0;
+            int toIdx = 10;
+            var listData = db.M_Country.Where(r => 1 == 2);
+
+            if (init)
+            {
+                listData = db.M_Country
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (q == r.CountryCode.ToString()))
+                )
+                .OrderBy(r => r.CountryName);
+            }
+            else
+            {
+                listData = db.M_Country
+                .Where
+                (
+                    r =>
+                    (string.IsNullOrEmpty(q) || (r.CountryName).ToUpper().Contains(q.ToUpper()))
+
+                )
+                .OrderBy(r => r.CountryName);
+            }
+
+            var data = listData.Skip(fromIdx)
+                .Take(toIdx)
+                .Select(r => new { id = r.CountryCode, text = r.CountryName })
+                .Distinct()
+                .ToList();
+
+            return new { items = data };
+        }
 
         [HttpGet]
         [Route("user")]

@@ -68,8 +68,8 @@
             <TabPanel header="Header Groups">
               <div v-if="header && isOverNotAccess">
                 <Message severity="warn" :closable="false">
-                  {{ $t("inactive_account") }} ({{
-                    Is_Locked ? "Locked" : "Unlocked"
+                  {{ $t("Account Status :") }} ({{
+                    Is_Active ? "Active" : "Not Active"
                   }})
                 </Message>
               </div>
@@ -151,13 +151,34 @@
                     labelClass="col-4"
                     fieldClass="col-6 md-6"
                   >
-                    <InputText
+                    <CustomSelect
                       name="Department"
                       v-model="header.Department"
-                      type="text"
-                      :placeholder="$t('department')"
                       v-if="header"
+                      :url="$API_URL + 'list/department_id'"
+                      :minLength="0"
+                      :filter="true"
                       :disabled="!canEdit"
+                      :placeholder="$t('department')"
+                    />
+                  </FormField>
+
+                  <FormField
+                    :labelName="$t('Estate')"
+                    fieldName="EstateCode"
+                    v-model="header"
+                    labelClass="col-4"
+                    fieldClass="col-6 md-6"
+                  >
+                    <CustomSelect
+                      name="Department"
+                      v-model="header.EstateCode"
+                      v-if="header"
+                      :url="$API_URL + 'list/estate'"
+                      :minLength="0"
+                      :filter="true"
+                      :disabled="!canEdit"
+                      :placeholder="$t('Estate')"
                     />
                   </FormField>
 
@@ -168,7 +189,6 @@
                     labelClass="col-4"
                     fieldClass="col-6 md-6"
                   >
-                    <!-- <InputText name="Email" v-model="header.Email" type="text" :placeholder="$t('email')"  v-if="header" :disabled="mode == this.$FORM_MODE_VIEW"  /> -->
                     <Checkbox
                       v-model="header.Use_AD"
                       :disabled="!canEdit"
@@ -198,45 +218,14 @@
                   </FormField>
 
                   <FormField
-                    labelName="Lock/Unlock Account"
-                    fieldName="Lock_Unlock"
-                    v-model="header"
-                    labelClass="col-4"
-                    fieldClass="col-6 md-6"
-                  >
-                    <Button
-                      label="Lock/Unlock Account"
-                      class="p-button-warning"
-                      v-if="header"
-                      :disabled="!canEdit"
-                      @click="openDialog"
-                    />
-                  </FormField>
-
-                  <FormField
-                    :labelName="$t('all_company')"
-                    fieldName="All_Company"
+                    :labelName="$t('Is Active')"
+                    fieldName="IsActive"
                     v-model="header"
                     labelClass="col-4"
                     fieldClass="col-6 md-6"
                   >
                     <Checkbox
-                      v-model="header.Company_All"
-                      :disabled="!canEdit"
-                      v-if="header"
-                      :binary="true"
-                    />
-                  </FormField>
-
-                  <FormField
-                    :labelName="$t('all_department')"
-                    fieldName="All_Department"
-                    v-model="header"
-                    labelClass="col-4"
-                    fieldClass="col-6 md-6"
-                  >
-                    <Checkbox
-                      v-model="header.Department_All"
+                      v-model="header.IsActive"
                       :disabled="!canEdit"
                       v-if="header"
                       :binary="true"
@@ -254,77 +243,15 @@
                 </div>
               </div>
             </TabPanel>
-            <TabPanel :header="$t('company')">
-              <Companies
-                :dataArray="header.Companies"
-                :dataModel="companyModel"
-                v-if="header"
-                :header="header"
-                :mode="mode"
-              />
-            </TabPanel>
-            <!-- <TabPanel :header="$t('location')">
-                            <Locations :dataArray="header.Locations" :dataModel="locationModel" v-if="header" :header="header" :mode="mode"/>
-                        </TabPanel> -->
-            <TabPanel :header="$t('department')">
-              <Department
-                :dataArray="header.Departments"
-                :dataModel="deparmentmodel"
-                v-if="header"
-                :header="header"
-                :mode="mode"
-              />
-            </TabPanel>
           </TabView>
         </div>
       </template>
     </Card>
-
-    <!-- <ChangePassword
-            v-if="changePassword"
-            :isVisible="changePassword"
-            :userId="username"
-            :requireCurrentPassword="true"
-            @hide="hideChangePasswordDialog"
-        /> -->
-
-    <Dialog
-      header="Lock/Unlock Account"
-      v-model:visible="displayDialog"
-      :closable="false"
-      :breakpoints="{ '960px': '75vw', '640px': '90vw' }"
-      :style="{ width: '30vw' }"
-    >
-      <div>
-        <Message severity="warn" :closable="false">
-          {{ inactive_msg }} ({{ Is_Locked ? "Locked" : "Unlocked" }})
-        </Message>
-        <h6 id="single">Please select lock or unlock account</h6>
-        <SelectButton
-          v-model="Is_Locked"
-          :options="lockOption"
-          optionLabel="name"
-          optionValue="value"
-          aria-labelledby="single"
-        />
-      </div>
-      <template #footer>
-        <Button
-          label="Cancel"
-          icon="pi pi-times"
-          @click="closeDialog"
-          class="p-button-text"
-        />
-        <Button label="Save" icon="pi pi-check" @click="saveLockUser" />
-      </template>
-    </Dialog>
   </form>
 </template>
 
 <script>
 import Groups from "./_Groups.vue";
-import Companies from "./_Companies.vue";
-import Department from "./_Departments.vue";
 
 //import Locations from './_Locations.vue';
 
@@ -332,9 +259,6 @@ export default {
   name: "Editor",
   components: {
     Groups: Groups,
-    Companies: Companies,
-    Department: Department,
-    //  Locations: Locations
   },
   data() {
     return {
@@ -346,24 +270,10 @@ export default {
       mode: "",
       id: 0,
       formEditable: true,
-      groupModel: null,
-      companyModel: null,
-      businessSegmentModel: null,
-      purchaseOrganizationModel: null,
-      salesOrganizationModel: null,
-      plantModel: null,
-      distributionModel: null,
-      locationModel: null,
-      commodityGroupModel: null,
       changePassword: false,
       deparmentmodel: null,
       username: null,
-
-      Is_Locked: null,
-      lockOption: [
-        { name: "Lock", value: true },
-        { name: "Unlock", value: false },
-      ],
+      Is_Active: false,
       displayDialog: false,
       inactive_msg: "",
     };
@@ -375,19 +285,13 @@ export default {
         .get(this.url + this.id + "/" + this.mode)
         .then((response) => {
           console.log(response);
+          response.data.data.header.Use_AD =
+            response.data.data.header.Use_AD == "Y" ? true : false;
+          response.data.data.header.IsActive =
+            response.data.data.header.IsActive == "Y" ? true : false;
           self.header = response.data.data.header;
           self.groupModel = response.data.data.group;
-          self.companyModel = response.data.data.company;
-          self.businessSegmentModel = response.data.data.business_segment;
-          self.plantModel = response.data.data.plant;
-          self.distributionModel = response.data.data.distribution;
-          self.locationModel = response.data.data.location;
-          self.commodityGroupModel = response.data.data.commodity_group;
-          self.purchaseOrganizationModel =
-            response.data.data.purchase_organization;
-          self.salesOrganizationModel = response.data.data.sales_organization;
-          self.Is_Locked = response.data.data.header.Is_Blocked;
-          self.deparmentmodel = response.data.data.department;
+          self.Is_Active = response.data.data.header.IsActive;
         })
         .catch(function (error) {
           console.log(error);

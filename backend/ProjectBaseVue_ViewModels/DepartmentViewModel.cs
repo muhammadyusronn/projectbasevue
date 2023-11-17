@@ -15,15 +15,15 @@ namespace ProjectBaseVue_ViewModels
         public DepartmentViewModel(DataEntities db, long Id)
         {
 
-            Department model = db.Department.Find(Id);
+            M_Department model = db.M_Department.Find(Id);
             if (model == null) return;
-            BaseProgram.CopyProperties(typeof(Department), model, typeof(DepartmentModel), this);
+            BaseProgram.CopyProperties(typeof(M_Department), model, typeof(DepartmentModel), this);
 
         }
 
-        public DepartmentViewModel(Department model)
+        public DepartmentViewModel(M_Department model)
         {
-            BaseProgram.CopyProperties(typeof(Department), model, typeof(DepartmentModel), this);
+            BaseProgram.CopyProperties(typeof(M_Department), model, typeof(DepartmentModel), this);
             mode = Constants.FORM_MODE_UNCHANGED;
         }
 

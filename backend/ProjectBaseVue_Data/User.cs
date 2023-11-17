@@ -20,7 +20,6 @@ namespace ProjectBaseVue_Data
             this.UserGroup = new HashSet<UserGroup>();
             this.UserPassLog = new HashSet<UserPassLog>();
             this.UserRole = new HashSet<UserRole>();
-            this.UserCompany = new HashSet<UserCompany>();
         }
     
         public long Id { get; set; }
@@ -29,7 +28,7 @@ namespace ProjectBaseVue_Data
         public string Password { get; set; }
         public string Email { get; set; }
         public string Location_Code { get; set; }
-        public string DepartmentCode { get; set; }
+        public string Department { get; set; }
         public string IsAdmin { get; set; }
         public string Use_AD { get; set; }
         public string CreatedBy { get; set; }
@@ -41,6 +40,8 @@ namespace ProjectBaseVue_Data
         public string IsDeleted { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public string DeletedBy { get; set; }
+        public string EstateCode { get; set; }
+        public string IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserGroup> UserGroup { get; set; }
@@ -48,7 +49,5 @@ namespace ProjectBaseVue_Data
         public virtual ICollection<UserPassLog> UserPassLog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRole { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserCompany> UserCompany { get; set; }
     }
 }

@@ -12,17 +12,15 @@ namespace ProjectBaseVue_Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class T_ScheduleData
     {
-        public long Id { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
-        public string CreatedBy { get; set; }
+        public int Id { get; set; }
+        public string ScheduleID { get; set; }
+        public Nullable<System.DateTime> ScheduleDate { get; set; }
+        public string EstateCode { get; set; }
+        public Nullable<System.TimeSpan> TimeStart { get; set; }
+        public Nullable<System.TimeSpan> TimeEnd { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string EditedBy { get; set; }
-        public Nullable<System.DateTime> EditedDate { get; set; }
-        public string IsDeleted { get; set; }
-        public string DeletedBy { get; set; }
-        public Nullable<System.DateTime> DeletedDate { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

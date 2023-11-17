@@ -17,7 +17,7 @@ namespace ProjectBaseVue_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiAuthorize]
-    public class DepartmentController : ControllerBase
+    public class RegionController : ControllerBase
     {
         DataEntities db = new DataEntities();
 
@@ -33,7 +33,7 @@ namespace ProjectBaseVue_API.Controllers
             int totalRecords = 0;
             int pageSize =20;
             int skip = request != null ? request.start : 0;
-            string orderBy = "a.id DESC";
+            string orderBy = "a.RegionCode DESC";
             List<SqlParameter> parameters = new List<SqlParameter>(), parametert = new List<SqlParameter>();
 
             try
@@ -47,11 +47,12 @@ namespace ProjectBaseVue_API.Controllers
                 ";
                 string query = @"SELECT 
                                     ROW_NUMBER() OVER(ORDER BY {1}) AS row_number,
-                                    a.* 
-                                    FROM M_Department a 
+                                     a.*,b.CountryName 
+                                    FROM M_Region a 
+					                INNER JOIN M_Country b ON a.CountryCode = b.CountryCode
                                     WHERE 1=1 {0} ";
                 string whereQuery = "";
-                string totalQuery = "SELECT COUNT(a.Id) From M_Department a WHERE 1=1  {0}";
+                string totalQuery = "SELECT COUNT(a.RegionCode) From M_Region a WHERE 1=1  {0}";
                 if (request != null)
                 {
                     if (request.filters != null && request.filters.Count > 0)
@@ -88,7 +89,7 @@ namespace ProjectBaseVue_API.Controllers
                     if (request.sorts != null && request.sorts.Count > 0)
                     {
                         List<string> sortList = new List<string>();
-                        string tableAlias = "a.";
+                        string tableAlias = "";
                         string sortBy = "DESC";
                         for (int i = 0; i < request.sorts.Count; i++)
                         {
@@ -98,12 +99,12 @@ namespace ProjectBaseVue_API.Controllers
 
                             sortList.Add(tableAlias + columnName + " " + sortBy);
                         }
-                        orderBy = String.Join(", ", sortList)+", "+tableAlias+ "Id " + sortBy;
+                        orderBy = String.Join(", ", sortList)+", "+tableAlias+ "RegionCode " + sortBy;
                     }
                 }
-                string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "Id DESC" : orderBy));
+                string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "RegionCode DESC" : orderBy));
                 string qwery = string.Format(baseQuery, fQuery, skip+1, skip+pageSize);
-                var data = db.Database.SqlQuery<DepartmentModel>(qwery, parameters.ToArray()).ToList();
+                var data = db.Database.SqlQuery<RegionModel>(qwery, parameters.ToArray()).ToList();
 
                 foreach (SqlParameter prm in parameters)
                     parametert.Add(new SqlParameter(prm.ParameterName, prm.Value));
@@ -127,18 +128,18 @@ namespace ProjectBaseVue_API.Controllers
 
         }
 
-        [HttpGet("{id}")]
-        public ResultData GetData(long id)
+        [HttpGet("{RegionCode}")]
+        public ResultData GetData(string RegionCode)
         {
             var result = new ResultData();
 
             try
             {
-                var header = new DepartmentModel();
+                var header = new RegionModel();
 
-                if (id.ToString() != "")
+                if (RegionCode != "")
                 {
-                    header = new DepartmentViewModel(db, id);
+                    header = new RegionViewModel(db, RegionCode);
                 }
 
                 result.data = new EditorHelper()
@@ -156,7 +157,7 @@ namespace ProjectBaseVue_API.Controllers
         }
 
         [HttpPost]
-        public ResultData Save(DepartmentModel modelData)
+        public ResultData Save(RegionModel modelData)
         {
             var result = new ResultData();
             bool success = false;
@@ -166,63 +167,59 @@ namespace ProjectBaseVue_API.Controllers
             {
                 var user = HttpContext.GetUserData().UserData();
 
-                M_Department model;
+                M_Region model;
                 if (modelData.mode == Constants.FORM_MODE_CREATE)
                 {
-                    var existedData = db.M_Department.Where(r =>
-                                            r.Id == modelData.Id
+                    var existedData = db.M_Region.Where(r =>
+                                            r.RegionCode == modelData.RegionCode
                                         ).ToArray();
 
                     if (existedData != null && existedData.Length > 0)
                     {
-                        throw new Exception("Departement already exists!");
+                        throw new Exception("Region already exists!");
                     }
 
-                    model = new M_Department();
+                    model = new M_Region();
 
                     db.Entry(model).State = System.Data.Entity.EntityState.Added;
                 }
                 else
                 {
-                    model = db.M_Department.Find(modelData.Id);
+                    model = db.M_Region.Find(modelData.RegionCode);
 
                     if (modelData.mode == Constants.FORM_MODE_DELETE)
                     {
-                       
-                        if(model != null)
+
+                        if (model != null)
                         {
-                            model.IsDeleted = "Y";
-                            model.DeletedBy = modelData.DeletedBy;
-                            model.DeletedDate = modelData.DeletedDate;
+                            db.Entry(model).State = System.Data.Entity.EntityState.Deleted;
                         }
                     }
                     else if (modelData.mode == Constants.FORM_MODE_EDIT)
                     {
                         // EDIT PROSES
+                        db.Entry(model).State = System.Data.Entity.EntityState.Modified;
                     }
-                    db.Entry(model).State = System.Data.Entity.EntityState.Modified;
                 }
 
                 if (modelData.mode != Constants.FORM_MODE_DELETE)
                 {
                     //modelData.Id = (modelData.mode == Constants.FORM_MODE_CREATE) ? new Guid() : modelData.Id;
-                    
-                    model.Code = modelData.Code;
-                    model.Description = modelData.Description;
-                    model.CreatedBy = modelData.CreatedBy;
-                    model.CreatedDate = modelData.CreatedDate;
-                    model.EditedBy = modelData.EditedBy;
-                    model.EditedDate = modelData.EditedDate;
+
+                    model.RegionCode = modelData.RegionCode;
+                    model.Name = modelData.Name;
+                    model.CountryCode = modelData.CountryCode;
+                    model.isActive = modelData.isActive;
                 }
 
                 using (var transaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                       
+
                         db.SaveChanges();
                         transaction.Commit();
-                        message = "Departement has been saved";
+                        message = "Region has been saved";
                         success = true;
 
                     }
@@ -245,10 +242,9 @@ namespace ProjectBaseVue_API.Controllers
 
             return result;
         }
-
         public class EditorHelper
         {
-            public DepartmentModel header { get; set; }
+            public RegionModel header { get; set; }
         }
 
 

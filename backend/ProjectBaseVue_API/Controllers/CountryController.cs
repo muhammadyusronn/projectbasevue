@@ -17,7 +17,7 @@ namespace ProjectBaseVue_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [ApiAuthorize]
-    public class DepartmentController : ControllerBase
+    public class CountryController : ControllerBase
     {
         DataEntities db = new DataEntities();
 
@@ -48,10 +48,10 @@ namespace ProjectBaseVue_API.Controllers
                 string query = @"SELECT 
                                     ROW_NUMBER() OVER(ORDER BY {1}) AS row_number,
                                     a.* 
-                                    FROM M_Department a 
+                                    FROM M_Country a 
                                     WHERE 1=1 {0} ";
                 string whereQuery = "";
-                string totalQuery = "SELECT COUNT(a.Id) From M_Department a WHERE 1=1  {0}";
+                string totalQuery = "SELECT COUNT(a.Id) From M_Country a WHERE 1=1  {0}";
                 if (request != null)
                 {
                     if (request.filters != null && request.filters.Count > 0)
@@ -103,7 +103,7 @@ namespace ProjectBaseVue_API.Controllers
                 }
                 string fQuery = string.Format(query, whereQuery, (string.IsNullOrEmpty(orderBy) ? "Id DESC" : orderBy));
                 string qwery = string.Format(baseQuery, fQuery, skip+1, skip+pageSize);
-                var data = db.Database.SqlQuery<DepartmentModel>(qwery, parameters.ToArray()).ToList();
+                var data = db.Database.SqlQuery<CountryModel>(qwery, parameters.ToArray()).ToList();
 
                 foreach (SqlParameter prm in parameters)
                     parametert.Add(new SqlParameter(prm.ParameterName, prm.Value));
@@ -126,129 +126,9 @@ namespace ProjectBaseVue_API.Controllers
             return response;
 
         }
-
-        [HttpGet("{id}")]
-        public ResultData GetData(long id)
-        {
-            var result = new ResultData();
-
-            try
-            {
-                var header = new DepartmentModel();
-
-                if (id.ToString() != "")
-                {
-                    header = new DepartmentViewModel(db, id);
-                }
-
-                result.data = new EditorHelper()
-                {
-                    header = header
-                };
-            }
-            catch (Exception ex)
-            {
-                result.success = false;
-                result.message = ex.Message;
-            }
-
-            return result;
-        }
-
-        [HttpPost]
-        public ResultData Save(DepartmentModel modelData)
-        {
-            var result = new ResultData();
-            bool success = false;
-            string message = "";
-
-            try
-            {
-                var user = HttpContext.GetUserData().UserData();
-
-                M_Department model;
-                if (modelData.mode == Constants.FORM_MODE_CREATE)
-                {
-                    var existedData = db.M_Department.Where(r =>
-                                            r.Id == modelData.Id
-                                        ).ToArray();
-
-                    if (existedData != null && existedData.Length > 0)
-                    {
-                        throw new Exception("Departement already exists!");
-                    }
-
-                    model = new M_Department();
-
-                    db.Entry(model).State = System.Data.Entity.EntityState.Added;
-                }
-                else
-                {
-                    model = db.M_Department.Find(modelData.Id);
-
-                    if (modelData.mode == Constants.FORM_MODE_DELETE)
-                    {
-                       
-                        if(model != null)
-                        {
-                            model.IsDeleted = "Y";
-                            model.DeletedBy = modelData.DeletedBy;
-                            model.DeletedDate = modelData.DeletedDate;
-                        }
-                    }
-                    else if (modelData.mode == Constants.FORM_MODE_EDIT)
-                    {
-                        // EDIT PROSES
-                    }
-                    db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                }
-
-                if (modelData.mode != Constants.FORM_MODE_DELETE)
-                {
-                    //modelData.Id = (modelData.mode == Constants.FORM_MODE_CREATE) ? new Guid() : modelData.Id;
-                    
-                    model.Code = modelData.Code;
-                    model.Description = modelData.Description;
-                    model.CreatedBy = modelData.CreatedBy;
-                    model.CreatedDate = modelData.CreatedDate;
-                    model.EditedBy = modelData.EditedBy;
-                    model.EditedDate = modelData.EditedDate;
-                }
-
-                using (var transaction = db.Database.BeginTransaction())
-                {
-                    try
-                    {
-                       
-                        db.SaveChanges();
-                        transaction.Commit();
-                        message = "Departement has been saved";
-                        success = true;
-
-                    }
-                    catch (Exception exc)
-                    {
-                        message = exc.Message;
-                        //result = "Failed to save data.<br/>Error Message : " + exc_.Message.Replace(Environment.NewLine, " ").Replace("'", "");
-                        transaction.Rollback();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                success = false;
-                message = ex.Message;
-            }
-
-            result.success = success;
-            result.message = message;
-
-            return result;
-        }
-
         public class EditorHelper
         {
-            public DepartmentModel header { get; set; }
+            public CountryModel header { get; set; }
         }
 
 

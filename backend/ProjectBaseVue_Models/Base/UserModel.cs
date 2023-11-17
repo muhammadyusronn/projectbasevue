@@ -12,7 +12,6 @@ namespace ProjectBaseVue_Models
     {
         public UserModel() {
             Groups = new List<UserGroupModel>();
-            Companies = new List<UserCompanyModel>();
         }
         [DefaultValue(Constants.FORM_MODE_UNCHANGED)]
         public string mode { get; set; }
@@ -24,15 +23,13 @@ namespace ProjectBaseVue_Models
         public string Email { get; set; }
         public string Location_Code { get; set; }
         public string IsAdmin { get; set; }
+        public string IsActive { get; set; }
         public string Use_AD { get; set; }
    
         public Nullable<System.DateTime> LastAccessDate { get; set; }
 
-        public bool CompanyAll { get; set; }
-        public bool DepartmentAll { get; set; }
-        public string ContactPerson { get; set; }
-        public string Phone { get; set; }
-    
+        public string EstateCode { get; set; }
+        public string Department { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> EditedDate { get; set; }
@@ -40,10 +37,7 @@ namespace ProjectBaseVue_Models
         public string IsDeleted { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public string DeletedBy { get; set; }
-
-
         public List<UserGroupModel> Groups { get; set; }
-        public List<UserCompanyModel> Companies { get; set; }
     }
 
     public class UserGroupModel
@@ -61,35 +55,6 @@ namespace ProjectBaseVue_Models
         public string DeletedBy { get; set; }
     }
 
-    public class UserCompanyModel
-    {
-        public string mode { get; set; }
-        public long Id { get; set; }
-        public long UserId { get; set; }
-        public long CompanyId { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> EditedDate { get; set; }
-        public string EditedBy { get; set; }
-        public string IsDeleted { get; set; }
-        public Nullable<System.DateTime> DeletedDate { get; set; }
-        public string DeletedBy { get; set; }
-    }
-
-    //public class UserDepartmentModel
-    //{
-    //    public string mode { get; set; }
-    //    public long Id { get; set; }
-    //    public long UserId { get; set; }
-    //    public long DepartmentId { get; set; }
-    //    public Nullable<System.DateTime> CreatedDate { get; set; }
-    //    public string CreatedBy { get; set; }
-    //    public Nullable<System.DateTime> EditedDate { get; set; }
-    //    public string EditedBy { get; set; }
-    //    public string IsDeleted { get; set; }
-    //    public Nullable<System.DateTime> DeletedDate { get; set; }
-    //    public string DeletedBy { get; set; }
-    //}
 
     //USER LOGIN LOG TOKEN
 

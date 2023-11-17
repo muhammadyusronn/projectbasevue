@@ -43,4 +43,26 @@ export default [
     },
     props: true,
   },
+  {
+    path: "/Schedule/Index",
+    name: "ScheduleIndex",
+    component: () => import("@/components/Transaction/Schedule/Index.vue"),
+    meta: {
+      name: "ScheduleIndex",
+      menuTitle: "Schedule",
+      requiresAuth: true,
+    },
+    props: true,
+  },
+  {
+    path: "/Schedule/Editor",
+    name: "ScheduleEditor",
+    component: () => import("@/components/Transaction/Schedule/Editor.vue"),
+    meta: {
+      name: "ScheduleEditor",
+      menuTitle: "Schedule",
+      requiresAuth: true,
+    },
+    props: true,
+  },
 ];

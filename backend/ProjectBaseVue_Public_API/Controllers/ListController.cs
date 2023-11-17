@@ -50,7 +50,7 @@ namespace ProjectBaseVue_Public_API.Controllers
         }
 
         [HttpGet]
-        [Route("company")]
+        [Route("companyV1")]
         public object Company(string q = "", int page = 0, bool init = false, string exclude_ids = "")
         {
             try
@@ -573,6 +573,86 @@ namespace ProjectBaseVue_Public_API.Controllers
                 var userHeaders = HttpContext.GetMiddlewareAuth();
                 Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
                 return UUtils.CallMiddlewareListAPI(API_URL + $"menu?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("jabatan")]
+        public object JabatanList(string q = "", int page = 0, bool init = false)
+        {
+            try
+            {
+                var userHeaders = HttpContext.GetMiddlewareAuth();
+                Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
+                return UUtils.CallMiddlewareListAPI(API_URL + $"jabatan?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("estate")]
+        public object EstateList(string q = "", int page = 0, bool init = false)
+        {
+            try
+            {
+                var userHeaders = HttpContext.GetMiddlewareAuth();
+                Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
+                return UUtils.CallMiddlewareListAPI(API_URL + $"estate?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("region")]
+        public object RegionList(string q = "", int page = 0, bool init = false)
+        {
+            try
+            {
+                var userHeaders = HttpContext.GetMiddlewareAuth();
+                Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
+                return UUtils.CallMiddlewareListAPI(API_URL + $"region?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("company")]
+        public object CompanyList(string q = "", int page = 0, bool init = false)
+        {
+            try
+            {
+                var userHeaders = HttpContext.GetMiddlewareAuth();
+                Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
+                return UUtils.CallMiddlewareListAPI(API_URL + $"company?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        [HttpGet]
+        [Route("country")]
+        public object CountryList(string q = "", int page = 0, bool init = false)
+        {
+            try
+            {
+                var userHeaders = HttpContext.GetMiddlewareAuth();
+                Dictionary<string, object> parameters = GetDefaultParameter(q, page, init);
+                return UUtils.CallMiddlewareListAPI(API_URL + $"country?q={q}&page={page}&init={init}", userHeaders, parameters, "", "GET");
             }
             catch (Exception ex)
             {
